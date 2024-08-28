@@ -1,0 +1,23 @@
+﻿@page
+@model dotnet8_practice_razor.client.Pages.Department.EditModel
+
+<div class="row">
+    <div class="col-sm-12">
+        <form method="post">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.DepartmentEditModel.Id)
+            <h2>Department Information</h2>
+            <div class="row mb-4">
+                <div class="col-sm-4">
+                    <div class="form-floating">
+                        <input asp-for="DepartmentEditModel.Name" class="form-control" id="nameInput" maxlength="50" required />
+                        <label asp-for="DepartmentEditModel.Name" for="nameInput"></label>
+                        <span asp-validation-for="DepartmentEditModel.Name" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Save</button>
+            <a class="btn btn-secondary mt-2" asp-controller="Department" asp-action="Index">Return</a>
+        </form>
+    </div>
+</div>

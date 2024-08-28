@@ -1,0 +1,153 @@
+﻿@page
+@model dotnet8_practice_razor.client.Pages.Employee.CreateModel
+
+<div class="row">
+    <div class="col-sm-12">
+        <form method="post">
+            @Html.AntiForgeryToken()
+            <h2>Personal Particulars</h2>
+            <div class="row mb-4">
+                <div class="col-sm-4">
+                    <div class="form-floating">
+                        <input asp-for="EmployeeCreateModel.Name" class="form-control" id="nameInput" maxlength="50" required />
+                        <label asp-for="EmployeeCreateModel.Name" for="nameInput"></label>
+                        <span asp-validation-for="EmployeeCreateModel.Name" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-sm-4">
+                    <div class="form-floating">
+                        <input asp-for="EmployeeCreateModel.Gender" class="form-control" id="genderInput" maxlength="20" required />
+                        <label asp-for="EmployeeCreateModel.Gender" for="genderInput"></label>
+                        <span asp-validation-for="EmployeeCreateModel.Gender" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-sm-4">
+                    <div class="form-floating">
+                        <input type="number" asp-for="EmployeeCreateModel.Age" class="form-control" id="ageInput" min="18" max="100" required />
+                        <label asp-for="EmployeeCreateModel.Age" for="ageInput"></label>
+                        <span asp-validation-for="EmployeeCreateModel.Age" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-sm-6">
+                    <div class="form-floating">
+                        <input asp-for="EmployeeCreateModel.Address.Line1" class="form-control" id="addressLine1Input" required />
+                        <label asp-for="EmployeeCreateModel.Address.Line1" for="addressLine1Input"></label>
+                        <span asp-validation-for="EmployeeCreateModel.Address.Line1" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-sm-6">
+                    <div class="form-floating">
+                        <input asp-for="EmployeeCreateModel.Address.Line2" class="form-control" id="addressLine2Input" />
+                        <label asp-for="EmployeeCreateModel.Address.Line2" for="addressLine2Input"></label>
+                        <span asp-validation-for="EmployeeCreateModel.Address.Line2" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-sm-4">
+                    <div class="form-floating">
+                        <input asp-for="EmployeeCreateModel.Address.UnitNo" class="form-control" id="addressUnitNoInput" />
+                        <label asp-for="EmployeeCreateModel.Address.UnitNo" for="addressUnitNoInput"></label>
+                        <span asp-validation-for="EmployeeCreateModel.Address.UnitNo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-sm-4">
+                    <div class="form-floating">
+                        <input asp-for="EmployeeCreateModel.Address.PostalCode" class="form-control" id="addressPostalCodeInput" required />
+                        <label asp-for="EmployeeCreateModel.Address.PostalCode" for="addressPostalCodeInput"></label>
+                        <span asp-validation-for="EmployeeCreateModel.Address.PostalCode" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-sm-4">
+                    <div class="form-floating">
+                        <input asp-for="EmployeeCreateModel.Address.Country" class="form-control" id="addressCountryInput" required />
+                        <label asp-for="EmployeeCreateModel.Address.Country" for="addressCountryInput"></label>
+                        <span asp-validation-for="EmployeeCreateModel.Address.Country" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-sm-4">
+                    <div class="form-floating">
+                        <input asp-for="EmployeeCreateModel.Address.City" class="form-control" id="addressCityInput" />
+                        <label asp-for="EmployeeCreateModel.Address.City" for="addressCityInput"></label>
+                        <span asp-validation-for="EmployeeCreateModel.Address.City" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-sm-4">
+                    <div class="form-floating">
+                        <input asp-for="EmployeeCreateModel.Address.State" class="form-control" id="addressStateInput" />
+                        <label asp-for="EmployeeCreateModel.Address.State" for="addressStateInput"></label>
+                        <span asp-validation-for="EmployeeCreateModel.Address.State" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-sm-3">
+                    <div class="form-floating">
+                        <input type="number" asp-for="EmployeeCreateModel.ContactCountryCode" class="form-control" id="contactCountryCodeInput" required />
+                        <label asp-for="EmployeeCreateModel.ContactCountryCode" for="contactCountryCodeInput"></label>
+                        <span asp-validation-for="EmployeeCreateModel.ContactCountryCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-floating">
+                        <input type="number" asp-for="EmployeeCreateModel.ContactNo" class="form-control" id="contactNoInput" required />
+                        <label asp-for="EmployeeCreateModel.ContactNo" for="contactNoInput"></label>
+                        <span asp-validation-for="EmployeeCreateModel.ContactNo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Employment Information</h2>
+
+            <div class="row mb-4">
+                <div class="col-sm-4">
+                    <div class="form-floating">
+                        @* asp-items="@(new SelectList(Model.WardSelectList, "Value", "Key"))" ) *@
+                        <select id="departmentInput" class="form-control" asp-for="EmployeeCreateModel.DepartmentId" asp-items="@(new SelectList(Model.EmployeeCreateModel.DepartmentSelectList, "Value", "Key"))" ) required></select>
+                        <label asp-for="EmployeeCreateModel.DepartmentId" for="departmentInput"></label>
+                        <span asp-validation-for="EmployeeCreateModel.DepartmentId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-sm-4">
+                    <div class="form-floating">
+                        <input type="number" asp-for="EmployeeCreateModel.Salary" class="form-control" id="salaryInput" required />
+                        <label asp-for="EmployeeCreateModel.Salary" for="salaryInput"></label>
+                        <span asp-validation-for="EmployeeCreateModel.Salary" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary mt-2">Add</button>
+            <a class="btn btn-secondary mt-2" asp-controller="Employee" asp-action="Index">Return</a>
+        </form>
+    </div>
+</div>

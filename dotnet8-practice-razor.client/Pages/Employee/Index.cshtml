@@ -1,0 +1,104 @@
+﻿@page "/employee/{handler?}"
+@model dotnet8_practice_razor.client.Pages.Employee.EmployeeIndexModel
+
+<div class="row mb-3">
+    <div class="col-sm-12">
+        <a class="btn btn-primary" onclick="return AddEmployee();">Add Employee</a>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-sm-12">
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Salary</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.EmployeeListModel.Employees.Count > 0)
+                        {
+                            @foreach (var employee in Model.EmployeeListModel.Employees)
+                            {
+                                <tr>
+                                    <td>@employee.Id</td>
+                                    <td>@employee.Name</td>
+                                    <td>$@employee.Salary.ToString("F2")</td>
+                                    <td>@employee.DepartmentName</td>
+                                    <td>
+                                        <a class="btn btn-sm btn-link" onclick="return ViewEmployee('@employee.Id');">View</a>
+                                        <a class="btn btn-sm btn-link" onclick="return EditEmployee('@employee.Id');">Edit</a>
+                                        <a class="btn btn-sm btn-link" onclick="return DeleteEmployee('@employee.Id');" data-bs-toggle="modal" data-bs-target="#modalDeleteEmployee">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5">No employee records</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ViewData["EmployeeDeleteSuccess"] != null)
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <span style="color:green">@ViewData["EmployeeDeleteSuccess"]</span>
+        </div>
+    </div>
+}
+
+<form asp-page-handler="delete" method="post" id="deleteEmployeeForm">
+    @Html.Hidden("employeeId", "", new { @id = "deleteEmployeeId" })
+    <div class="modal fade" id="modalDeleteEmployee" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm deletion?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    function AddEmployee() {
+        var url = "@Url.Page("create")";
+        location.href = url;
+    }
+
+    function ViewEmployee(employeeId) {
+        var url = "@Url.Page("detail")" + "?employeeId=" + encodeURIComponent(employeeId);
+        location.href = url;
+    }
+
+    function EditEmployee(employeeId) {
+        var url = "@Url.Page("edit")" + "?employeeId=" + encodeURIComponent(employeeId);
+        location.href = url;
+    }
+
+    function DeleteEmployee(employeeId) {
+        $("#deleteEmployeeForm").find("#deleteEmployeeId").val(employeeId);
+    }
+</script>
