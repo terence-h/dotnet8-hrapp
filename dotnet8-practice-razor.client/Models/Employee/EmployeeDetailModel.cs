@@ -17,7 +17,6 @@ public class EmployeeDetailModel
     public required int DepartmentId { get; set; }
     [DisplayName("Department")]
     public required string DepartmentName { get; set; }
-
     public required AddressInfo Address { get; set; }
 
     public class AddressInfo

@@ -8,8 +8,8 @@ public class DetailEmployeeResponseProfile : Profile
     public DetailEmployeeResponseProfile()
     {
         CreateMap<Entities.Employee, DetailEmployeeResponse>()
-            .ForMember(resp => resp.EmpDepId, e => e.MapFrom(e => e.Department.DepartmentId))
-            .ForMember(resp => resp.EmpDepName, e => e.MapFrom(e => e.Department.DepartmentName))
+            .ForMember(resp => resp.DepartmentId, e => e.MapFrom(e => e.Department.DepartmentId))
+            .ForMember(resp => resp.DepartmentName, e => e.MapFrom(e => e.Department.DepartmentName))
             .ForMember(resp => resp.EmpAddress, e => e.MapFrom((e, resp) =>
             {
                 var mAddress = new DetailEmployeeResponse.Address

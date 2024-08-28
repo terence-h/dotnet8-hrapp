@@ -29,9 +29,9 @@
             <div class="row mb-4">
                 <div class="col-sm-4">
                     <div class="form-floating">
-                        <input type="number" asp-for="EmployeeCreateModel.Age" class="form-control" id="ageInput" min="18" max="100" required />
-                        <label asp-for="EmployeeCreateModel.Age" for="ageInput"></label>
-                        <span asp-validation-for="EmployeeCreateModel.Age" class="text-danger"></span>
+                        <input type="date" asp-for="EmployeeCreateModel.DateOfBirth" class="form-control" id="dobInput" max="@DateTime.Now.ToString("yyyy-MM-dd")" value="" required />
+                        <label asp-for="EmployeeCreateModel.DateOfBirth" for="dobInput"></label>
+                        <span asp-validation-for="EmployeeCreateModel.DateOfBirth" class="text-danger"></span>
                     </div>
                 </div>
             </div>

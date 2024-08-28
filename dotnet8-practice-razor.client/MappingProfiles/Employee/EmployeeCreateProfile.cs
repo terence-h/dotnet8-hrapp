@@ -9,13 +9,6 @@ public class EmployeeCreateProfile : Profile
     public EmployeeCreateProfile()
     {
         CreateMap<EmployeeCreateModel, CreateEmployeeRequest>()
-            .ForMember(req => req.EmpName, e => e.MapFrom(model => model.Name))
-            .ForMember(req => req.EmpSalary, e => e.MapFrom(model => model.Salary))
-            .ForMember(req => req.EmpGender, e => e.MapFrom(model => model.Gender))
-            .ForMember(req => req.EmpAge, e => e.MapFrom(model => model.Age))
-            .ForMember(req => req.EmpContactCountryCode, e => e.MapFrom(model => model.ContactCountryCode))
-            .ForMember(req => req.EmpContactNo, e => e.MapFrom(model => model.ContactNo))
-            .ForMember(req => req.EmpDepartmentId, e => e.MapFrom(model => model.DepartmentId))
             .ForMember(req => req.EmpAddress, e => e.MapFrom((e, req) =>
             {
                 var reqAddress = new CreateEmployeeRequest.Address

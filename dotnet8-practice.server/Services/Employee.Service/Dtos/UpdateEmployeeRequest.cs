@@ -7,21 +7,21 @@ namespace Employee.Service.Dtos;
 
 public class UpdateEmployeeRequest
 {
-    public required int EmpId { get; set; }
+    public required int Id { get; set; }
     [Required]
-    public required string EmpName { get; set; }
+    public required string Name { get; set; }
     [Required]
-    public required double EmpSalary { get; set; }
+    public required double Salary { get; set; }
     [Required]
-    public required string EmpGender { get; set; }
+    public required string Gender { get; set; }
     [Required]
-    public required int EmpAge { get; set; }
+    public required DateTime DateOfBirth { get; set; }
     [Required]
-    public required int EmpContactCountryCode { get; set; }
+    public required int ContactCountryCode { get; set; }
     [Required]
-    public required int EmpContactNo { get; set; }
+    public required int ContactNo { get; set; }
     [Required]
-    public required int EmpDepartmentId { get; set; }
+    public required int DepartmentId { get; set; }
     [Required]
     public required Address EmpAddress { get; set; }
 

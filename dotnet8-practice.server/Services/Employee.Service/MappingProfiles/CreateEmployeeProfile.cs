@@ -8,7 +8,6 @@ public class CreateEmployeeProfile : Profile
     public CreateEmployeeProfile()
     {
         CreateMap<CreateEmployeeRequest, Entities.Employee>()
-            //.ForMember(e => e.EmpDepartmentId, req => req.MapFrom(req => req.EmpDepartmentId))
             .ForMember(e => e.Address, req => req.MapFrom((req, e) =>
             {
                 var mAddress = new Entities.Address

@@ -42,7 +42,7 @@ public class EditModel(IEmployeeProxy employeeProxy, IDepartmentProxy department
 
         try
         {
-            var response = await _employeeProxy.UpdateEmployeeAsync(request.EmpId, request);
+            var response = await _employeeProxy.UpdateEmployeeAsync(request.Id, request);
             TempData["EmployeeDetailCallback"] = "Employee changes saved successfully";
             return RedirectToPage("Detail", new { employeeId = response });
         }

@@ -8,8 +8,8 @@ public class EmployeeCreateModel
     public string Name { get; set; }
     [DisplayName("Salary (required)")]
     public double Salary { get; set; }
-    [DisplayName("Age (required)")]
-    public int Age { get; set; }
+    [DisplayName("Date of Birth (required)")]
+    public DateTime DateOfBirth { get; set; }
     [DisplayName("Gender (required)")]
     public string Gender { get; set; }
     [DisplayName("Country Code (required)")]

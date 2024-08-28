@@ -30,9 +30,9 @@
             <div class="row mb-4">
                 <div class="col-sm-4">
                     <div class="form-floating">
-                        <input type="number" asp-for="EmployeeEditModel.Age" class="form-control" id="ageInput" min="18" max="100" required />
-                        <label asp-for="EmployeeEditModel.Age" for="ageInput"></label>
-                        <span asp-validation-for="EmployeeEditModel.Age" class="text-danger"></span>
+                        <input type="date" asp-for="EmployeeEditModel.DateOfBirth" class="form-control" id="dobInput" max="@DateTime.Now.ToString("yyyy-MM-dd")" value="@Model.EmployeeEditModel.DateOfBirth.ToString("yyyy-MM-dd")" required />
+                        <label asp-for="EmployeeEditModel.DateOfBirth" for="dobInput"></label>
+                        <span asp-validation-for="EmployeeEditModel.DateOfBirth" class="text-danger"></span>
                     </div>
                 </div>
             </div>

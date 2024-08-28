@@ -15,27 +15,13 @@ public class EmployeeListProfile : Profile
 
                 foreach(var employee in dto)
                 {
-                    //var mAddress = new EmployeeListModel.Address
-                    //{
-                    //    Line1 = employee.EmpAddress.Line1,
-                    //    Line2 = employee.EmpAddress.Line2,
-                    //    UnitNo = employee.EmpAddress.UnitNo,
-                    //    PostalCode = employee.EmpAddress.PostalCode,
-                    //    Country = employee.EmpAddress.Country,
-                    //    City = employee.EmpAddress.City,
-                    //    State = employee.EmpAddress.State
-                    //};
-
                     var mEmployee = new EmployeeListModel.EmployeeInfo
                     {
-                        Id = employee.EmpId,
-                        Name = employee.EmpName,
-                        Salary = employee.EmpSalary,
-                        Age = employee.EmpAge,
-                        Gender = employee.EmpGender,
-                        DepartmentId = employee.EmpDepId,
-                        DepartmentName = employee.EmpDepName,
-                        //Address = mAddress
+                        Id = employee.Id,
+                        Name = employee.Name,
+                        Salary = employee.Salary,
+                        DepartmentId = employee.DepartmentId,
+                        DepartmentName = employee.DepartmentName,
                     };
 
                     employees.Add(mEmployee);

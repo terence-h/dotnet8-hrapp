@@ -2,11 +2,9 @@
 
 public class SearchEmployeesResponse
 {
-    public required int EmpId { get; set; }
-    public required string EmpName { get; set; }
-    public required double EmpSalary { get; set; }
-    public required string EmpGender { get; set; }
-    public required int EmpAge { get; set; }
-    public required int EmpDepId { get; set; }
-    public required string EmpDepName { get; set; }
+    public required int Id { get; set; }
+    public required string Name { get; set; }
+    public required double Salary { get; set; }
+    public required int DepartmentId { get; set; }
+    public required string DepartmentName { get; set; }
 }
