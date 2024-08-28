@@ -1,6 +1,7 @@
 using dotnet8_practice_razor.client.Controllers;
 using dotnet8_practice_razor.client.MappingProfiles.Employee;
 using dotnet8_practice_razor.client.WebApiProxy;
+using Refit;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -39,11 +40,17 @@ void AddRefitClients()
     if (webApiServerUrl == null)
         throw new NullReferenceException("Missing web api server URL");
 
-    services.AddRefitClientWithValidation<IEmployeeProxy>()
-            .ConfigureHttpClient(c => c.BaseAddress = new Uri(webApiServerUrl));
+    //services.AddRefitClientWithValidation<IEmployeeProxy>()
+    //        .ConfigureHttpClient(c => c.BaseAddress = new Uri(webApiServerUrl));
 
-    services.AddRefitClientWithValidation<IDepartmentProxy>()
-            .ConfigureHttpClient(c => c.BaseAddress = new Uri(webApiServerUrl));
+    //services.AddRefitClientWithValidation<IDepartmentProxy>()
+    //        .ConfigureHttpClient(c => c.BaseAddress = new Uri(webApiServerUrl));
+
+    services.AddRefitClient<IEmployeeProxy>()
+        .ConfigureHttpClient(c => c.BaseAddress = new Uri(webApiServerUrl));
+
+    services.AddRefitClient<IDepartmentProxy>()
+        .ConfigureHttpClient(c => c.BaseAddress = new Uri(webApiServerUrl));
 }
 
 void AddAutoMapper()

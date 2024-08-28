@@ -24,7 +24,7 @@ public class DepartmentListProfile : Profile
                             Id = employee.Id,
                             Name = employee.Name,
                             Salary = employee.Salary,
-                            Age = employee.Age,
+                            DateOfBirth = employee.DateOfBirth,
                             Gender = employee.Gender
                         });
                     }

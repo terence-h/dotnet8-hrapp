@@ -21,11 +21,11 @@ public class DetailDepartmentResponseProfile : Profile
                 {
                     mEmployees.Add(new DetailDepartmentResponse.Employee
                     {
-                        Id = employee.EmpId,
-                        Name = employee.EmpName,
-                        Salary = employee.EmpSalary,
-                        Age = employee.EmpAge,
-                        Gender = employee.EmpGender
+                        Id = employee.Id,
+                        Name = employee.Name,
+                        Salary = employee.Salary,
+                        DateOfBirth = employee.DateOfBirth,
+                        Gender = employee.Gender
                     });
                 }
                 

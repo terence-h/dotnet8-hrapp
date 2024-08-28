@@ -7,32 +7,32 @@ public record class Employee
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int EmpId { get; set; }
+    public int Id { get; set; }
 
     [Required]
     [MaxLength(50)]
-    public required string EmpName { get; set; }
+    public required string Name { get; set; }
 
     [Required]
     [Column(TypeName = "decimal(10, 2)")]
-    public required double EmpSalary { get; set; }
+    public required double Salary { get; set; }
 
     [Required]
     [MaxLength(20)]
-    public required string EmpGender { get; set; }
+    public required string Gender { get; set; }
 
     [Required]
-    public required int EmpAge { get; set; }
+    public required DateTime DateOfBirth { get; set; }
 
     [Required]
-    public required int EmpContactCountryCode { get; set; }
+    public required int ContactCountryCode { get; set; }
 
     [Required]
-    public required int EmpContactNo { get; set; }
+    public required int ContactNo { get; set; }
 
     [Required]
     [ForeignKey(nameof(Department))]
-    public required int EmpDepartmentId { get; set; }
+    public required int DepartmentId { get; set; }
 
     public required Department Department { get; init; }
 

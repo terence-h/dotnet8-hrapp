@@ -9,7 +9,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4" />
-		<PackageReference Include="NCS.IConnectNet.Validation.HttpClient.Refit" Version="8.1.1" />
 		<PackageReference Include="Refit.HttpClientFactory" Version="7.1.2" />
 	</ItemGroup>
 

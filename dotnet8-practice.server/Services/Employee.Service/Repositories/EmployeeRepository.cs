@@ -16,12 +16,12 @@ public class EmployeeRepository(EmployeeDbContext dbContext) : IEmployeeReposito
             await _dbContext.SaveChangesAsync();
             transaction.Commit();
         }
-        return employee.EmpId;
+        return employee.Id;
     }
 
     public async Task<int> DeleteEmployeeAsync(int employeeId)
     {
-        var employee = _dbContext.Employees.Where(e => e.EmpId == employeeId) ?? throw new NullReferenceException("Employee ID does not exist!");
+        var employee = _dbContext.Employees.Where(e => e.Id == employeeId) ?? throw new NullReferenceException("Employee ID does not exist!");
         using (var transaction = _dbContext.Database.BeginTransaction())
         {
             await employee.ExecuteDeleteAsync();
@@ -35,7 +35,7 @@ public class EmployeeRepository(EmployeeDbContext dbContext) : IEmployeeReposito
         var employee = await _dbContext.Employees
             .AsNoTracking()
             .Include(e => e.Department)
-            .SingleOrDefaultAsync(e => e.EmpId == employeeId)
+            .SingleOrDefaultAsync(e => e.Id == employeeId)
             ?? throw new NullReferenceException($"Employee ID {employeeId} does not exist!");
 
         return employee;
@@ -56,6 +56,6 @@ public class EmployeeRepository(EmployeeDbContext dbContext) : IEmployeeReposito
             await _dbContext.SaveChangesAsync();
             transaction.Commit();
         }
-        return employee.EmpId;
+        return employee.Id;
     }
 }
