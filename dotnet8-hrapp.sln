@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet8-practice.server", "dotnet8-practice.server\dotnet8-practice.server.csproj", "{46C97AF7-6B51-48D7-BBD1-1AF39CD59939}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet8-hrapp.server", "dotnet8-hrapp.server\dotnet8-hrapp.server.csproj", "{46C97AF7-6B51-48D7-BBD1-1AF39CD59939}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet8-practice-razor.client", "dotnet8-practice-razor.client\dotnet8-practice-razor.client.csproj", "{50DFF9A5-7D2C-4E5B-8AFF-E319289F0CEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet8-hrapp-razor.client", "dotnet8-hrapp-razor.client\dotnet8-hrapp-razor.client.csproj", "{50DFF9A5-7D2C-4E5B-8AFF-E319289F0CEF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_Common.Service", "dotnet8-practice.server\Services\Common.Service\_Common.Service.csproj", "{795F6D8D-4FA4-440F-8A51-3E93371CEE67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_Common.Service", "dotnet8-hrapp.server\Services\Common.Service\_Common.Service.csproj", "{795F6D8D-4FA4-440F-8A51-3E93371CEE67}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_Department.Service", "dotnet8-practice.server\Services\Department.Service\_Department.Service.csproj", "{896D6A4A-4E78-45EE-A62A-2EAB7EC015B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_Department.Service", "dotnet8-hrapp.server\Services\Department.Service\_Department.Service.csproj", "{896D6A4A-4E78-45EE-A62A-2EAB7EC015B2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_Employee.Service", "dotnet8-practice.server\Services\Employee.Service\_Employee.Service.csproj", "{457F55DB-144F-4BC9-AAEE-EBD64E98A2FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_Employee.Service", "dotnet8-hrapp.server\Services\Employee.Service\_Employee.Service.csproj", "{457F55DB-144F-4BC9-AAEE-EBD64E98A2FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,41 @@
+﻿@model dotnet8_hrapp_razor.client.Models.Department.DepartmentDetailModel
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Salary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Employees.Count > 0)
+                        {
+                            @foreach (var employee in Model.Employees)
+                            {
+                                <tr>
+                                    <td>@employee.Id</td>
+                                    <td><a asp-controller="Employee" asp-action="Detail" asp-route-employeeId="@employee.Id">@employee.Name</a></td>
+                                    <td>$@employee.Salary.ToString("F2")</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="3">No employee records</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

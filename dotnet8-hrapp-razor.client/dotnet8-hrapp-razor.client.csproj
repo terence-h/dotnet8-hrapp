@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>dotnet8_hrapp_razor.client</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4" />
+		<PackageReference Include="Refit.HttpClientFactory" Version="7.1.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="..\dotnet8-hrapp.server\Services\Employee.Service\Dtos\*.cs">
+			<Link>WebApiProxy\Dtos\Employee\%(RecursiveDir)%(FileName)</Link>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="..\dotnet8-hrapp.server\Services\Department.Service\Dtos\*.cs">
+			<Link>WebApiProxy\Dtos\Department\%(RecursiveDir)%(FileName)</Link>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\dotnet8-hrapp.server\Services\Common.Service\_Common.Service.csproj" />
+	</ItemGroup>
+
+</Project>

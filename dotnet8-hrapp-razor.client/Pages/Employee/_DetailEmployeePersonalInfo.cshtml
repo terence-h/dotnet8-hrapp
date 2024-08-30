@@ -1,0 +1,90 @@
+﻿@model dotnet8_hrapp_razor.client.Models.Employee.EmployeeDetailModel
+@{
+    Layout = null;
+}
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-sm-4">
+            <label asp-for="Name" class="fw-bold"></label>
+            <div class="fw-normal">
+                @Model.Name
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-sm-4">
+            <label asp-for="Gender" class="fw-bold"></label>
+            <div class="fw-normal">
+                @Model.Gender
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label asp-for="Age" class="fw-bold"></label>
+            <div class="fw-normal">
+                @Model.Age
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-sm-4">
+            <label asp-for="Address.Line1" class="fw-bold"></label>
+            <div class="fw-normal">
+                @Model.Address.Line1
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label asp-for="Address.Line2" class="fw-bold"></label>
+            <div class="fw-normal">
+                @Model.Address.Line2
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-sm-4">
+            <label asp-for="Address.UnitNo" class="fw-bold"></label>
+            <div class="fw-normal">
+                @Model.Address.UnitNo
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label asp-for="Address.PostalCode" class="fw-bold"></label>
+            <div class="fw-normal">
+                @Model.Address.PostalCode
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-sm-4">
+            <label asp-for="Address.Country" class="fw-bold"></label>
+            <div class="fw-normal">
+                @Model.Address.Country
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label asp-for="Address.City" class="fw-bold"></label>
+            <div class="fw-normal">
+                @Model.Address.City
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-sm-4">
+            <label asp-for="Address.State" class="fw-bold"></label>
+            <div class="fw-normal">
+                @Model.Address.State
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label asp-for="ContactNo" class="fw-bold"></label>
+            <div class="fw-normal">
+                +@Model.ContactCountryCode @Model.ContactNo
+            </div>
+        </div>
+    </div>
+</div>
