@@ -19,7 +19,7 @@ public class CreateModel(IEmployeeProxy employeeProxy, IDepartmentProxy departme
 
     public async Task OnGetAsync()
     {
-        EmployeeCreateModel = new EmployeeCreateModel();
+        EmployeeCreateModel = new EmployeeCreateModel{Address=new EmployeeCreateModel.AddressInfo{Line1="", Line2="",PostalCode=0,Country=""}};
 
         var searchDepartmentsResp = await _departmentProxy.SearchDepartmentsAsync();
         DepartmentListModel departmentListModel = _mapper.Map<DepartmentListModel>(searchDepartmentsResp);

@@ -19,7 +19,7 @@ public class EmployeeEditModel
     public int ContactNo { get; set; }
     [DisplayName("Department (required)")]
     public int DepartmentId { get; set; }
-    public AddressInfo? Address { get; set; }
+    public required AddressInfo Address { get; set; }
 
     public class AddressInfo
     {

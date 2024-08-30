@@ -11,7 +11,7 @@
             "type": "shell",
             "args": [
                 "msbuild",
-                "dotnet8-practice-razor.client.csproj"
+                "dotnet8-hrapp-razor.client.csproj"
             ],
             "options": {
                 "cwd": "${workspaceRoot}"

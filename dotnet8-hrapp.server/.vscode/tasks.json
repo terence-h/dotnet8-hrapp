@@ -11,7 +11,7 @@
             "type": "shell",
             "args": [
                 "msbuild",
-                "dotnet8-practice.server.csproj"
+                "dotnet8-hrapp.server.csproj"
             ],
             "options": {
                 "cwd": "${workspaceRoot}"
