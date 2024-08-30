@@ -6,14 +6,12 @@ namespace Department.Service.Repositories;
 
 public class DepartmentRepository(DepartmentDbContext dbContext) : IDepartmentRepository
 {
-    private readonly DepartmentDbContext _dbContext = dbContext;
-
     public async Task<int> CreateDepartmentAsync(Entities.Department department)
     {
-        using (var transaction = _dbContext.Database.BeginTransaction())
+        using (var transaction = dbContext.Database.BeginTransaction())
         {
-            _dbContext.Departments.Add(department);
-            await _dbContext.SaveChangesAsync();
+            dbContext.Departments.Add(department);
+            await dbContext.SaveChangesAsync();
             transaction.Commit();
         }
         return department.DepartmentId;
@@ -21,8 +19,8 @@ public class DepartmentRepository(DepartmentDbContext dbContext) : IDepartmentRe
 
     public async Task<int> DeleteDepartmentAsync(int departmentId)
     {
-        var employee = _dbContext.Departments.Where(e => e.DepartmentId == departmentId) ?? throw new NullReferenceException("Department ID does not exist!");
-        using (var transaction = _dbContext.Database.BeginTransaction())
+        var employee = dbContext.Departments.Where(e => e.DepartmentId == departmentId) ?? throw new NullReferenceException("Department ID does not exist!");
+        using (var transaction = dbContext.Database.BeginTransaction())
         {
             await employee.ExecuteDeleteAsync();
             transaction.Commit();
@@ -32,7 +30,7 @@ public class DepartmentRepository(DepartmentDbContext dbContext) : IDepartmentRe
 
     public async Task<Entities.Department> GetDepartmentAsync(int departmentId)
     {
-        var department = await _dbContext.Departments
+        var department = await dbContext.Departments
             .AsNoTracking()
             .Include(e => e.Employees)
             .SingleOrDefaultAsync(e => e.DepartmentId == departmentId)
@@ -43,7 +41,7 @@ public class DepartmentRepository(DepartmentDbContext dbContext) : IDepartmentRe
 
     public async Task<List<Entities.Department>> SearchDepartmentsAsync()
     {
-        var departments = await _dbContext.Departments
+        var departments = await dbContext.Departments
             .AsNoTracking()
             .Include(e => e.Employees)
             .ToListAsync();
@@ -53,10 +51,10 @@ public class DepartmentRepository(DepartmentDbContext dbContext) : IDepartmentRe
 
     public async Task<int> UpdateDepartmentAsync(Entities.Department department)
     {
-        using (var transaction = _dbContext.Database.BeginTransaction())
+        using (var transaction = dbContext.Database.BeginTransaction())
         {
-            _dbContext.Departments.Update(department);
-            await _dbContext.SaveChangesAsync();
+            dbContext.Departments.Update(department);
+            await dbContext.SaveChangesAsync();
             transaction.Commit();
         }
         return department.DepartmentId;

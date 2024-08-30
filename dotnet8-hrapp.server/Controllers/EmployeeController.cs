@@ -6,20 +6,13 @@ namespace dotnet8_hrapp.server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class EmployeeController : ControllerBase
+public class EmployeeController(IEmployeeService employeeService) : ControllerBase
 {
-    private readonly IEmployeeService _employeeService;
-
-    public EmployeeController(IEmployeeService employeeService)
-    {
-        _employeeService = employeeService;
-    }
-
     // GET: api/Employee
     [HttpGet]
     public async Task<IActionResult> SearchEmployees()
     {
-        var result = await _employeeService.SearchEmployeesAsync();
+        var result = await employeeService.SearchEmployeesAsync();
             
         return Ok(result);
     }
@@ -28,7 +21,7 @@ public class EmployeeController : ControllerBase
     [HttpGet("{employeeId}")]
     public async Task<IActionResult> GetEmployee(int employeeId)
     {
-        var result = await _employeeService.GetEmployeeAsync(employeeId);
+        var result = await employeeService.GetEmployeeAsync(employeeId);
 
         return Ok(result);
     }
@@ -37,7 +30,7 @@ public class EmployeeController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateEmployee([FromBody] CreateEmployeeRequest request)
     {
-        var result = await _employeeService.CreateEmployeeAsync(request);
+        var result = await employeeService.CreateEmployeeAsync(request);
 
         return Ok(result);
     }
@@ -46,7 +39,7 @@ public class EmployeeController : ControllerBase
     [HttpPut("{employeeId}")]
     public async Task<IActionResult> UpdateEmployee(int employeeId, [FromBody] UpdateEmployeeRequest request)
     {
-        var result = await _employeeService.UpdateEmployeeAsync(request);
+        var result = await employeeService.UpdateEmployeeAsync(request);
         return Ok(result);
     }
 
@@ -54,7 +47,7 @@ public class EmployeeController : ControllerBase
     [HttpDelete("{employeeId}")]
     public async Task<IActionResult> DeleteEmployee(int employeeId)
     {
-        var result = await _employeeService.DeleteEmployeeAsync(employeeId);
+        var result = await employeeService.DeleteEmployeeAsync(employeeId);
         return Ok(result);
     }
 }
