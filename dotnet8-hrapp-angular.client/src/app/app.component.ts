@@ -9,5 +9,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'dotnet8-practice-angular.client';
+  title = 'dotnet8-hrapp-angular.client';
 }
