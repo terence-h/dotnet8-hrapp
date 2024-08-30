@@ -3,13 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Employee.Service.Database;
 
-public class EmployeeDbContext : DbContext
+public class EmployeeDbContext(DbContextOptions<EmployeeDbContext> options) : DbContext(options)
 {
-    public EmployeeDbContext(DbContextOptions<EmployeeDbContext> options)
-        : base(options)
-    {
-    }
-
     public DbSet<Entities.Employee> Employees { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,7 +18,7 @@ public class EmployeeDbContext : DbContext
             entity.Property(e => e.Id)
                 .HasColumnName("EMP_ID")
                 .ValueGeneratedOnAdd()
-                .UseIdentityColumn(1, 1);
+                .UseIdentityColumn(100, 1);
 
             entity.Property(e => e.Name)
                 .IsRequired()

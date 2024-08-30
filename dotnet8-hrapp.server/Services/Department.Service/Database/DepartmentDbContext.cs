@@ -2,13 +2,8 @@
 
 namespace Department.Service.Database;
 
-public class DepartmentDbContext : DbContext
+public class DepartmentDbContext(DbContextOptions<DepartmentDbContext> options) : DbContext(options)
 {
-    public DepartmentDbContext(DbContextOptions<DepartmentDbContext> options)
-        : base(options)
-    {
-    }
-
     public DbSet<Entities.Department> Departments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,7 +17,7 @@ public class DepartmentDbContext : DbContext
             entity.Property(e => e.DepartmentId)
                 .HasColumnName("DEPARTMENT_ID")
                 .ValueGeneratedOnAdd()
-                .UseIdentityColumn(1, 1);
+                .UseIdentityColumn(100, 1);
 
             entity.Property(e => e.DepartmentName)
                 .IsRequired()
