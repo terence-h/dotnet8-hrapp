@@ -6,20 +6,20 @@ public class EmployeeEditModel
 {
     public int Id { get; set; }
     [DisplayName("Name (required)")]
-    public string Name { get; set; }
+    public string? Name { get; set; }
     [DisplayName("Salary (required)")]
     public double Salary { get; set; }
     [DisplayName("Date of Birth (required)")]
     public DateTime DateOfBirth { get; set; }
     [DisplayName("Gender (required)")]
-    public string Gender { get; set; }
+    public string? Gender { get; set; }
     [DisplayName("Country Code (required)")]
     public int ContactCountryCode { get; set; }
     [DisplayName("Contact No. (required)")]
     public int ContactNo { get; set; }
     [DisplayName("Department (required)")]
     public int DepartmentId { get; set; }
-    public AddressInfo Address { get; set; }
+    public AddressInfo? Address { get; set; }
 
     public class AddressInfo
     {

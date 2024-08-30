@@ -34,7 +34,7 @@ public class CreateModel(IEmployeeProxy employeeProxy, IDepartmentProxy departme
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!this.ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return Page();
         }
