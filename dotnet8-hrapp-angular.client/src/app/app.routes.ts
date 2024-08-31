@@ -1,3 +1,25 @@
 import { Routes } from '@angular/router';
+import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
+import { DepartmentListComponent } from './department/department-list/department-list.component';
+import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+    {
+        path: 'employee',
+        children: [{
+            path: '',
+            title: 'Employees',
+            component: EmployeeListComponent
+        },
+        {
+            path: 'detail/:employeeId',
+            title: 'View Employee Detail',
+            component: EmployeeDetailComponent,
+        },]
+    },
+    {
+        path: 'department',
+        title: 'Departments',
+        component: DepartmentListComponent
+    }
+];
