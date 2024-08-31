@@ -1,6 +1,6 @@
 import { Address } from "./employee-address.interface";
 
-export interface EmployeeDetail {
+export interface IEmployeeDetail {
     id: number;
     name: string;
     salary: number;

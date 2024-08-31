@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="row">
+        <accordion [isAnimated]="true">
+            <accordion-group heading="Employment Information" [isOpen]="true">
+                @if(onInitFinished) {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            <strong>Employee ID</strong>
+                            <p>{{employee.id}}</p>
+                        </div>
+                        <div class="col-4">
+                            <strong>Department</strong>
+                            <p>{{employee.departmentName}}</p>
+                        </div>
+                        <div class="col-4">
+                            <strong>Salary</strong>
+                            <p>${{employee.salary.toFixed(2)}}</p>
+                        </div>
+                    </div>
+                </div>
+                }
+                @else {
+                <p>Loading...</p>
+                }
+            </accordion-group>
+            <accordion-group>
+                <button class="btn btn-link btn-block justify-content-between d-flex w-100 shadow-none" accordion-heading type="button">
+                    <div class="pull-left float-left">Personal Information</div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Show Date Of Birth</label>
+                    </div>
+                </button>
+                @if(onInitFinished) {
+                <div class="container">
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <strong>Gender</strong>
+                            <p>{{employee.gender}}</p>
+                        </div>
+                        <div class="col-4">
+                            <strong>Age</strong>
+                            <p>{{employee.getAgeFromDateOfBirth()}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <strong>Address (Line 1)</strong>
+                            <p>{{employee.empAddress.line1}}</p>
+                        </div>
+                        <div class="col-4">
+                            <strong>Address (Line 2)</strong>
+                            <p>{{employee.empAddress.line2}}</p>
+                        </div>
+                        <div class="col-4">
+                            <strong>Zip/Postal Code</strong>
+                            <p>{{employee.empAddress.unitNo}}</p>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <strong>Zip/Postal Code</strong>
+                            <p>{{employee.empAddress.postalCode}}</p>
+                        </div>
+                        <div class="col-4">
+                            <strong>City</strong>
+                            <p>{{employee.empAddress.city}}</p>
+                        </div>
+                        <div class="col-4">
+                            <strong>State</strong>
+                            <p>{{employee.empAddress.state}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <strong>Country Code</strong>
+                            <p>+{{employee.contactCountryCode}}</p>
+                        </div>
+                        <div class="col-4">
+                            <strong>Contact No.</strong>
+                            <p>{{employee.contactNo}}</p>
+                        </div>
+                    </div>
+                </div>
+                }
+                @else {
+                <p>Loading...</p>
+                }
+            </accordion-group>
+        </accordion>
+    </div>
+</div>

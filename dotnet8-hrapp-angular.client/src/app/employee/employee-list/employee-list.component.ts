@@ -14,10 +14,11 @@ import { EmployeeList } from '../shared/employee-list.interface';
 export class EmployeeListComponent implements OnInit {
   employeeService = inject(EmployeeService);
   employees!: EmployeeList[];
+  onInitFinished = false;
 
   ngOnInit(): void {
     this.employeeService.getEmployees().subscribe({
-      next: response => this.employees = response,
+      next: response => {this.employees = response; this.onInitFinished = true;},
       error: error => console.log(error)
     });
   }
