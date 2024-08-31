@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { map, Observable } from 'rxjs';
-import { EmployeeModel } from './employee.model';
+import { Observable } from 'rxjs';
+import { EmployeeList } from './employee-list.interface';
+import { EmployeeDetail } from './employee-detail.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,11 @@ import { EmployeeModel } from './employee.model';
 export class EmployeeService {
   http = inject(HttpClient);
 
-  getEmployees(): Observable<EmployeeModel[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/employee`).pipe(
-      map((response) => {
-        return response.map(data => new EmployeeModel(data));
-      })
-    );
+  getEmployees(): Observable<EmployeeList[]> {
+    return this.http.get<EmployeeList[]>(`${environment.apiUrl}/employee`);
+  }
+
+  getEmployee(employeeId: any): Observable<EmployeeDetail> {
+    return this.http.get<EmployeeDetail>(`${environment.apiUrl}/employee/${employeeId}`);
   }
 }

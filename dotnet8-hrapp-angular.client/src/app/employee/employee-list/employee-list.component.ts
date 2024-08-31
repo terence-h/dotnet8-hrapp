@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { EmployeeService } from '../shared/employee.service';
-import { Router, RouterLink } from '@angular/router';
-import { EmployeeModel } from '../shared/employee.model';
+import { RouterLink } from '@angular/router';
+import { EmployeeList } from '../shared/employee-list.interface';
 
 @Component({
   selector: 'app-employee-list',
@@ -13,13 +13,12 @@ import { EmployeeModel } from '../shared/employee.model';
 
 export class EmployeeListComponent implements OnInit {
   employeeService = inject(EmployeeService);
-  router = inject(Router);
-
-  employees!: EmployeeModel[];
+  employees!: EmployeeList[];
 
   ngOnInit(): void {
-    this.employeeService.getEmployees().subscribe(data => {
-      this.employees = data;
+    this.employeeService.getEmployees().subscribe({
+      next: response => this.employees = response,
+      error: error => console.log(error)
     });
   }
 }
