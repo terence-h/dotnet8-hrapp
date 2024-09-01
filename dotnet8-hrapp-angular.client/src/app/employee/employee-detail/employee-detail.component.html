@@ -15,7 +15,7 @@
                         </div>
                         <div class="col-4">
                             <strong>Salary</strong>
-                            <p>${{employee.salary.toFixed(2)}}</p>
+                            <p>{{employee.salary | currency}}</p>
                         </div>
                     </div>
                 </div>
@@ -24,20 +24,17 @@
                 <p>Loading...</p>
                 }
             </accordion-group>
-            <accordion-group>
-                <button class="btn btn-link btn-block justify-content-between d-flex w-100 shadow-none" accordion-heading type="button">
-                    <div class="pull-left float-left">Personal Information</div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Show Date Of Birth</label>
-                    </div>
-                </button>
+            <accordion-group heading="Personal Information" [isOpen]="true">
                 @if(onInitFinished) {
                 <div class="container">
                     <div class="row mb-5">
                         <div class="col-4">
                             <strong>Gender</strong>
                             <p>{{employee.gender}}</p>
+                        </div>
+                        <div class="col-4">
+                            <strong>Date Of Birth</strong>
+                            <p>{{employee.dateOfBirth | date: 'dd/MM/yyyy'}}</p>
                         </div>
                         <div class="col-4">
                             <strong>Age</strong>

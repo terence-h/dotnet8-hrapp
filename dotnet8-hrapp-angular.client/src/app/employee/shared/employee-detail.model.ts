@@ -1,4 +1,3 @@
-import { formatDate } from "@angular/common";
 import { Address } from "./employee-address.interface";
 import { IEmployeeDetail } from "./employee-detail.interface";
 
@@ -16,10 +15,6 @@ export class EmployeeDetail implements IEmployeeDetail {
 
     constructor(data: EmployeeDetail) {
         Object.assign(this, data);
-    }
-
-    getFormattedDateOfBirth(): string {
-        return formatDate(this.dateOfBirth, 'dd/MM/yyyy', 'en-SG');
     }
 
     getAgeFromDateOfBirth(): number {

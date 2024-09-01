@@ -3,12 +3,12 @@ import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { EmployeeService } from '../shared/employee.service';
 import { EmployeeDetail } from '../shared/employee-detail.model';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-employee-detail',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, AccordionModule],
+  imports: [RouterOutlet, CommonModule, AccordionModule, DatePipe, CurrencyPipe],
   templateUrl: './employee-detail.component.html',
   styleUrl: './employee-detail.component.scss'
 })
