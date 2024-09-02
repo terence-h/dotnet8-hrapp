@@ -6,7 +6,8 @@ import { EmployeeDetailComponent } from './employee/employee-detail/employee-det
 export const routes: Routes = [
     {
         path: 'employee',
-        children: [{
+        children: [
+        {
             path: '',
             title: 'Employees',
             component: EmployeeListComponent
@@ -19,7 +20,11 @@ export const routes: Routes = [
     },
     {
         path: 'department',
-        title: 'Departments',
-        component: DepartmentListComponent
+        children: [
+        {
+            path: '',
+            title: 'Departments',
+            component: DepartmentListComponent
+        }]
     }
 ];

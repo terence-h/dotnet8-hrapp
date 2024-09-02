@@ -1,1 +1,35 @@
-<p>department-list works!</p>
+@if (onInitFinished) {
+<div class="container">
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Department ID</th>
+                    <th scope="col">Department Name</th>
+                    <th scope="col">Employee Count</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(department of departments; track department.departmentId) {
+                <tr>
+                    <td>{{department.departmentId}}</td>
+                    <td>{{department.departmentName}}</td>
+                    <td>{{department.employees.length}}</td>
+                    <td>
+
+                        <a class="btn btn-sm btn-link" [routerLink]="['./detail', department.departmentId]">View</a>
+                        <a class="btn btn-sm btn-link" onclick="">Edit</a>
+                        <a class="btn btn-sm btn-link" onclick="" data-bs-toggle="modal"
+                            data-bs-target="#modalDeleteDepartment">Delete</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+}
+@else {
+<p>Loading...</p>
+}
