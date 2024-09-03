@@ -1,20 +1,24 @@
-<form [formGroup]="departmentForm" (ngSubmit)="createDepartment()" novalidate>
+@if(onInitFinished) {
+<form [formGroup]="departmentForm" (ngSubmit)="updateDepartment()" novalidate>
     <div class="container">
         <div class="row">
             <div class="col-3">
                 <div class="mb-3">
                     <label for="departmentName" class="form-label">Department Name</label>
-                    <input [formControl]="departmentForm.controls.departmentName" type="text" class="form-control" id="departmentName" placeholder="Enter a department name..." maxlength="50">
-                    @if (departmentForm.controls.departmentName.hasError('required') && (departmentForm.controls.departmentName.dirty || departmentForm.controls.departmentName.touched)) {
+                    <input [formControl]="departmentForm.controls.departmentName" type="text" class="form-control"
+                        id="departmentName" placeholder="Enter a department name..." maxlength="50">
+                    @if (departmentForm.controls.departmentName.hasError('required') &&
+                    (departmentForm.controls.departmentName.dirty || departmentForm.controls.departmentName.touched)) {
                     <span class="text-danger">Department name is required.</span>
                     }
                     @else if (departmentForm.controls.departmentName.hasError('pattern')) {
                     <span class="text-danger">Department name only accepts alphabets A to Z.</span>
                     }
                 </div>
-                <button type="submit" class="btn btn-primary" [disabled]="!departmentForm.valid">Add Department</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!departmentForm.valid">Save</button>
                 <button type="button" class="btn btn-danger ms-2" [routerLink]="['../..']">Cancel</button>
             </div>
         </div>
     </div>
 </form>
+}

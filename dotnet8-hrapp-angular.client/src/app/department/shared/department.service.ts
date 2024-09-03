@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DepartmentList } from './department-list.interface';
 import { environment } from '../../../environments/environment.development';
 import { DepartmentCreate } from './department-create.interface';
+import { DepartmentEdit } from './department-edit.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,13 @@ export class DepartmentService {
     const httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post<DepartmentCreate>(`${environment.apiUrl}/department`, departmentObj, { headers: httpHeaders });
+  }
+
+  updateDepartment(departmentObj: any): Observable<DepartmentEdit> {
+    const httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    const jsonStr = JSON.stringify(departmentObj);
+
+    return this.http.put<DepartmentEdit>(`${environment.apiUrl}/department/${departmentObj.departmentId}`, jsonStr, { headers: httpHeaders });
   }
 }

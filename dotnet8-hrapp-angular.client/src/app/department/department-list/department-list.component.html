@@ -25,9 +25,8 @@
                     <td>{{department.departmentName}}</td>
                     <td>{{department.employees.length}}</td>
                     <td>
-
                         <a class="btn btn-sm btn-link" [routerLink]="['./detail', department.departmentId]">View</a>
-                        <a class="btn btn-sm btn-link" onclick="">Edit</a>
+                        <a class="btn btn-sm btn-link" [routerLink]="['./edit', department.departmentId]">Edit</a>
                         <a class="btn btn-sm btn-link" onclick="" data-bs-toggle="modal"
                             data-bs-target="#modalDeleteDepartment">Delete</a>
                     </td>
@@ -38,7 +37,6 @@
                     <td colspan="4">No department records</td>
                 </tr>
                 }
-
             </tbody>
         </table>
     </div>
