@@ -33,4 +33,8 @@ export class DepartmentService {
 
     return this.http.put<DepartmentEdit>(`${environment.apiUrl}/department/${departmentObj.departmentId}`, jsonStr, { headers: httpHeaders });
   }
+
+  deleteDepartment(departmentId: any) {
+    return this.http.delete(`${environment.apiUrl}/department/${departmentId}`);
+  }
 }

@@ -1,0 +1,38 @@
+<div class="modal-header">
+    @if (employees.length > 0) {
+    <h4 class="modal-title pull-left">Unable to delete {{departmentName}}</h4>
+    } @else {
+    <h4 class="modal-title pull-left">Confirm Delete?</h4>
+    }
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    @if (employees.length > 0) {
+    <p>Employees listed below are in <strong>{{departmentName}}</strong>.</p>
+    @for (employee of employees; track employee.id) {
+    <div class="container">
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Employee ID</th>
+                        <th scope="col">Employee Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{employee.id}}</td>
+                        <td>{{employee.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    }
+    } @else {
+    <p>Are you sure you want to delete <strong>{{departmentName}}</strong>?</p>
+    <button type="button" class="btn btn-danger" (click)="deleteDepartment()">Delete</button>
+    }
+</div>
