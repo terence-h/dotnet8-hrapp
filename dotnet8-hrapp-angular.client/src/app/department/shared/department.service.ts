@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DepartmentList } from './department-list';
+import { DepartmentList } from './department-list.interface';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({
@@ -12,5 +12,9 @@ export class DepartmentService {
 
   getDepartments(): Observable<DepartmentList[]> {
     return this.http.get<DepartmentList[]>(`${environment.apiUrl}/department`);
+  }
+
+  getDepartment(departmentId: any): Observable<DepartmentList> {
+    return this.http.get<DepartmentList>(`${environment.apiUrl}/department/${departmentId}`);
   }
 }

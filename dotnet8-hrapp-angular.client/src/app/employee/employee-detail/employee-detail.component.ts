@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { EmployeeService } from '../shared/employee.service';
 import { EmployeeDetail } from '../shared/employee-detail.model';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
@@ -8,7 +8,7 @@ import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 @Component({
   selector: 'app-employee-detail',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, AccordionModule, DatePipe, CurrencyPipe],
+  imports: [RouterLink, CommonModule, AccordionModule, DatePipe, CurrencyPipe],
   templateUrl: './employee-detail.component.html',
   styleUrl: './employee-detail.component.scss'
 })

@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+        <accordion [isAnimated]="true">
+            <accordion-group heading="Employment Information" [isOpen]="true">
+                @if(onInitFinished) {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            <strong>Department ID</strong>
+                            <p>{{department.departmentId}}</p>
+                        </div>
+                        <div class="col-4">
+                            <strong>Department Name</strong>
+                            <p>{{department.departmentName}}</p>
+                        </div>
+                    </div>
+                </div>
+                }
+                @else {
+                <p>Loading...</p>
+                }
+            </accordion-group>
+            <accordion-group heading="List of Employees" [isOpen]="true">
+                @if(onInitFinished) {
+                <div class="container">
+                    <div class="row">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Employee ID</th>
+                                    <th scope="col">Employee Name</th>
+                                    <th scope="col">Employee Salary</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for(employee of department.employees; track employee.id) {
+                                <tr>
+                                    <td>{{employee.id}}</td>
+                                    <td><a class="btn-link" [routerLink]="['../../../employee/detail', employee.id]">{{employee.name}}</a></td>
+                                    <td>${{employee.salary.toFixed(2)}}</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                }
+                @else {
+                <p>Loading...</p>
+                }
+            </accordion-group>
+        </accordion>
+    </div>
+</div>

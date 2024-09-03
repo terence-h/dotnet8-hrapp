@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DepartmentService } from '../shared/department.service';
-import { DepartmentList } from '../shared/department-list';
+import { DepartmentList } from '../shared/department-list.interface';
 
 @Component({
   selector: 'app-department-list',
