@@ -1,6 +1,13 @@
 @if (onInitFinished) {
 <div class="container">
     <div class="row">
+        <div class="col-2">
+            <button type="button" class="btn btn-primary" routerLink="create">
+                Add Department
+            </button>
+        </div>
+    </div>
+    <div class="row">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -11,6 +18,7 @@
                 </tr>
             </thead>
             <tbody>
+                @if (departments.length > 0) {
                 @for(department of departments; track department.departmentId) {
                 <tr>
                     <td>{{department.departmentId}}</td>
@@ -25,6 +33,12 @@
                     </td>
                 </tr>
                 }
+                } @else {
+                <tr>
+                    <td colspan="4">No department records</td>
+                </tr>
+                }
+
             </tbody>
         </table>
     </div>

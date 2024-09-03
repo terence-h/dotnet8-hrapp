@@ -33,13 +33,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for(employee of department.employees; track employee.id) {
-                                <tr>
-                                    <td>{{employee.id}}</td>
-                                    <td><a class="btn-link" [routerLink]="['../../../employee/detail', employee.id]">{{employee.name}}</a></td>
-                                    <td>${{employee.salary.toFixed(2)}}</td>
-                                </tr>
+                                @if (department.employees.length > 0) {
+                                    @for(employee of department.employees; track employee.id) {
+                                        <tr>
+                                            <td>{{employee.id}}</td>
+                                            <td><a class="btn-link" [routerLink]="['../../../employee/detail', employee.id]">{{employee.name}}</a></td>
+                                            <td>${{employee.salary.toFixed(2)}}</td>
+                                        </tr>
+                                        }
+                                } @else {
+                                    <tr>
+                                        <td colspan="3">No employeees in this department.</td>
+                                    </tr>
                                 }
+                                
                             </tbody>
                         </table>
                     </div>
