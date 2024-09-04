@@ -1,11 +1,8 @@
-@if (onInitFinished) {
-
-}
 <form [formGroup]="employeeForm" (ngSubmit)="createEmployee()" novalidate>
     <div class="container">
         <div class="row mb-3">
             <div class="col-3">
-                <label for="employeeName" class="form-label">Employeee Name</label>
+                <label for="employeeName" class="form-label">Name</label><span class="text-danger">*</span>
                 <input [formControl]="employeeForm.controls.name" type="text" class="form-control" id="employeeName"
                     placeholder="Enter employee name..." maxlength="50">
                 @if (employeeForm.controls.name.hasError('required') && (employeeForm.controls.name.dirty ||
@@ -19,7 +16,7 @@
         </div>
         <div class="row mb-3">
             <div class="col-3">
-                <label for="employeeDepartment" class="form-label">Department</label>
+                <label for="employeeDepartment" class="form-label">Department</label><span class="text-danger">*</span>
                 @if (onInitFinished) {
                 <select [formControl]="employeeForm.controls.departmentId" class="form-select" id="employeeDepartment"
                     aria-label="DepartmentSelect">
@@ -33,6 +30,123 @@
                 (employeeForm.controls.departmentId.dirty ||
                 employeeForm.controls.departmentId.touched)) {
                 <span class="text-danger">Employee's department is required.</span>
+                }
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-3">
+                <label for="employeeSalary" class="form-label">Salary</label><span class="text-danger">*</span>
+                <input [formControl]="employeeForm.controls.salary" type="number" class="form-control"
+                    id="employeeSalary" placeholder="Enter employee salary...">
+                @if (employeeForm.controls.salary.hasError('required') && (employeeForm.controls.salary.dirty ||
+                employeeForm.controls.salary.touched)) {
+                <span class="text-danger">Employee salary is required.</span>
+                }
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-3">
+                <label for="employeeGender" class="form-label">Gender</label><span class="text-danger">*</span>
+                <input [formControl]="employeeForm.controls.gender" type="text" class="form-control" id="employeeGender"
+                    placeholder="Enter employee gender..." maxlength="20">
+                @if (employeeForm.controls.name.hasError('required') && (employeeForm.controls.gender.dirty ||
+                employeeForm.controls.gender.touched)) {
+                <span class="text-danger">Employee gender is required.</span>
+                }
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-3">
+                <label for="employeeDOB" class="form-label">Date Of Birth</label><span class="text-danger">*</span>
+                <input [formControl]="employeeForm.controls.dateOfBirth" type="text"
+                    placeholder="Enter employee date of birth..." class="form-control" id="employeeDOB" bsDatepicker
+                    [maxDate]="maxDate" [bsConfig]="{ adaptivePosition: true }">
+                @if (employeeForm.controls.dateOfBirth.hasError('required') && (employeeForm.controls.dateOfBirth.dirty
+                ||
+                employeeForm.controls.dateOfBirth.touched)) {
+                <span class="text-danger">Employee date of birth is required.</span>
+                }
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-4">
+                <label for="employeeAddressLine1" class="form-label">Address Line 1</label><span
+                    class="text-danger">*</span>
+                <input [formControl]="employeeForm.controls.empAddress.controls.line1" type="text" class="form-control"
+                    id="employeeAddressLine1" placeholder="Enter address line 1...">
+                @if (employeeForm.controls.empAddress.controls.line1.hasError('required') &&
+                (employeeForm.controls.empAddress.controls.line1.dirty ||
+                employeeForm.controls.empAddress.controls.line1.touched)) {
+                <span class="text-danger">Address line 1 is required.</span>
+                }
+            </div>
+            <div class="col-4">
+                <label for="employeeAddressLine2" class="form-label">Address Line 2</label>
+                <input [formControl]="employeeForm.controls.empAddress.controls.line2" type="text" class="form-control"
+                    id="employeeAddressLine2" placeholder="Enter address line 2...">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-3">
+                <label for="employeeAddressUnitNo" class="form-label">Unit No</label>
+                <input [formControl]="employeeForm.controls.empAddress.controls.unitNo" type="text" class="form-control"
+                    id="employeeAddressUnitNo" placeholder="Enter address unit number...">
+            </div>
+            <div class="col-3">
+                <label for="employeeAddressPostalCode" class="form-label">Zip/Postal Code</label><span
+                    class="text-danger">*</span>
+                <input [formControl]="employeeForm.controls.empAddress.controls.postalCode" type="number"
+                    class="form-control" id="employeeAddressPostalCode" placeholder="Enter zip/postal code...">
+                @if (employeeForm.controls.empAddress.controls.postalCode.hasError('required') &&
+                (employeeForm.controls.empAddress.controls.postalCode.dirty ||
+                employeeForm.controls.empAddress.controls.postalCode.touched)) {
+                <span class="text-danger">Zip/postal code is required.</span>
+                }
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-3">
+                <label for="employeeAddressCountry" class="form-label">Country</label><span class="text-danger">*</span>
+                <input [formControl]="employeeForm.controls.empAddress.controls.country" type="text"
+                    class="form-control" id="employeeAddressCountry" placeholder="Enter country...">
+                @if (employeeForm.controls.empAddress.controls.country.hasError('required') &&
+                (employeeForm.controls.empAddress.controls.country.dirty ||
+                employeeForm.controls.empAddress.controls.country.touched)) {
+                <span class="text-danger">Country is required.</span>
+                }
+            </div>
+            <div class="col-3">
+                <label for="employeeAddressCity" class="form-label">City</label>
+                <input [formControl]="employeeForm.controls.empAddress.controls.city" type="text" class="form-control"
+                    id="employeeAddressCity" placeholder="Enter city...">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-3">
+                <label for="employeeAddressState" class="form-label">State</label>
+                <input [formControl]="employeeForm.controls.empAddress.controls.state" type="text" class="form-control"
+                    id="employeeAddressState" placeholder="Enter state...">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-3">
+                <label for="employeeContactCountryCode" class="form-label">Country Code</label><span
+                    class="text-danger">*</span>
+                <input [formControl]="employeeForm.controls.contactCountryCode" type="number" class="form-control"
+                    id="employeeContactCountryCode" placeholder="Enter country code...">
+                @if (employeeForm.controls.contactCountryCode.hasError('required') &&
+                (employeeForm.controls.contactCountryCode.dirty ||
+                employeeForm.controls.contactCountryCode.touched)) {
+                <span class="text-danger">Country code is required.</span>
+                }
+            </div>
+            <div class="col-3">
+                <label for="employeeContactNo" class="form-label">Contact No.</label><span class="text-danger">*</span>
+                <input [formControl]="employeeForm.controls.contactNo" type="number" class="form-control"
+                    id="employeeContactNo" placeholder="Enter employee contact number...">
+                @if (employeeForm.controls.contactNo.hasError('required') && (employeeForm.controls.contactNo.dirty ||
+                employeeForm.controls.contactNo.touched)) {
+                <span class="text-danger">Contact number is required.</span>
                 }
             </div>
         </div>

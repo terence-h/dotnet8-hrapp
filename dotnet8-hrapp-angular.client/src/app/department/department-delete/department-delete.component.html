@@ -11,7 +11,6 @@
 <div class="modal-body">
     @if (employees.length > 0) {
     <p>Employees listed below are in <strong>{{departmentName}}</strong>.</p>
-    @for (employee of employees; track employee.id) {
     <div class="container">
         <div class="row">
             <table class="table table-hover">
@@ -21,16 +20,17 @@
                         <th scope="col">Employee Name</th>
                     </tr>
                 </thead>
+                @for (employee of employees; track employee.id) {
                 <tbody>
                     <tr>
                         <td>{{employee.id}}</td>
                         <td>{{employee.name}}</td>
                     </tr>
                 </tbody>
+                }
             </table>
         </div>
     </div>
-    }
     } @else {
     <p>Are you sure you want to delete <strong>{{departmentName}}</strong>?</p>
     <button type="button" class="btn btn-danger" (click)="deleteDepartment()">Delete</button>

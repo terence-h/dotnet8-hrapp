@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row mb-3">
             <div class="col-3">
-                <label for="departmentName" class="form-label">Department Name</label>
+                <label for="departmentName" class="form-label">Department Name</label><span class="text-danger">*</span>
                 <input [formControl]="departmentForm.controls.departmentName" type="text" class="form-control"
                     id="departmentName" placeholder="Enter a department name..." maxlength="50">
                 @if (departmentForm.controls.departmentName.hasError('required') &&

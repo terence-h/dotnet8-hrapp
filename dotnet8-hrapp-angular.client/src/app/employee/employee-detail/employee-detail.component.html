@@ -10,6 +10,12 @@
                             <p>{{employee.id}}</p>
                         </div>
                         <div class="col-4">
+                            <strong>Employee Name</strong>
+                            <p>{{employee.name}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
                             <strong>Department</strong>
                             <p><a class="btn-link" [routerLink]="['../../../department/detail', employee.departmentId]">{{employee.departmentName}}</a></p>
                         </div>
