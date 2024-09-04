@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Confirm Delete?</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <p>Are you sure you want to delete?</p>
+    <p>Employee ID: <strong>{{employeeId}}</strong><br>Employee Name: <strong>{{employeeName}}</strong></p>
+    <button type="button" class="btn btn-danger" (click)="deleteEmployee()">Delete</button>
+</div>

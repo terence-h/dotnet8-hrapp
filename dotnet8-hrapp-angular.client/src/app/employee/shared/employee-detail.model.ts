@@ -13,7 +13,7 @@ export class EmployeeDetail implements IEmployeeDetail {
     departmentName?: string | undefined;
     empAddress!: Address;
 
-    constructor(data: EmployeeDetail) {
+    constructor(data: IEmployeeDetail) {
         Object.assign(this, data);
     }
 

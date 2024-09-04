@@ -28,7 +28,6 @@ export class DepartmentService {
 
   updateDepartment(departmentObj: any): Observable<DepartmentEdit> {
     const httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-
     const jsonStr = JSON.stringify(departmentObj);
 
     return this.http.put<DepartmentEdit>(`${environment.apiUrl}/department/${departmentObj.departmentId}`, jsonStr, { headers: httpHeaders });

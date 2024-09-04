@@ -6,6 +6,7 @@ import { DepartmentDetailComponent } from './department/department-detail/depart
 import { DepartmentCreateComponent } from './department/department-create/department-create.component';
 import { DepartmentEditComponent } from './department/department-edit/department-edit.component';
 import { EmployeeCreateComponent } from './employee/employee-create/employee-create.component';
+import { EmployeeEditComponent } from './employee/employee-edit/employee-edit.component';
 
 export const routes: Routes = [
     {
@@ -20,6 +21,11 @@ export const routes: Routes = [
             path: 'create',
             title: 'Add Employee',
             component: EmployeeCreateComponent
+        },
+        {
+            path: 'edit/:employeeId',
+            title: 'Edit Employee',
+            component: EmployeeEditComponent
         },
         {
             path: 'detail/:employeeId',

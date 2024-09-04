@@ -27,9 +27,8 @@
           <td>
 
             <a class="btn btn-sm btn-link" [routerLink]="['./detail', employee.id]">View</a>
-            <a class="btn btn-sm btn-link" onclick="">Edit</a>
-            <a class="btn btn-sm btn-link" onclick="" data-bs-toggle="modal"
-              data-bs-target="#modalDeleteEmployee">Delete</a>
+            <a class="btn btn-sm btn-link" [routerLink]="['./edit', employee.id]">Edit</a>
+            <a class="btn btn-sm btn-link" (click)="openModal(employee.id, employee.name)">Delete</a>
           </td>
         </tr>
         }
@@ -41,6 +40,11 @@
       </tbody>
     </table>
   </div>
+  @if (onDeleted) {
+    <alert type="success">
+        Employee information has been deleted successfully.
+    </alert>
+    }
 </div>
 }
 @else {
