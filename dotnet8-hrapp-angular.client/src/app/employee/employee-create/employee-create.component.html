@@ -1,0 +1,46 @@
+@if (onInitFinished) {
+
+}
+<form [formGroup]="employeeForm" (ngSubmit)="createEmployee()" novalidate>
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-3">
+                <label for="employeeName" class="form-label">Employeee Name</label>
+                <input [formControl]="employeeForm.controls.name" type="text" class="form-control" id="employeeName"
+                    placeholder="Enter employee name..." maxlength="50">
+                @if (employeeForm.controls.name.hasError('required') && (employeeForm.controls.name.dirty ||
+                employeeForm.controls.name.touched)) {
+                <span class="text-danger">Employee name is required.</span>
+                }
+                @else if (employeeForm.controls.name.hasError('pattern')) {
+                <span class="text-danger">Employee name only accepts alphabets A to Z.</span>
+                }
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-3">
+                <label for="employeeDepartment" class="form-label">Department</label>
+                @if (onInitFinished) {
+                <select [formControl]="employeeForm.controls.departmentId" class="form-select" id="employeeDepartment"
+                    aria-label="DepartmentSelect">
+                    <option selected value="">Select a department...</option>
+                    @for (department of departmentList; track department.departmentId) {
+                    <option [value]="department.departmentId">{{department.departmentName}}</option>
+                    }
+                </select>
+                }
+                @if (employeeForm.controls.departmentId.hasError('required') &&
+                (employeeForm.controls.departmentId.dirty ||
+                employeeForm.controls.departmentId.touched)) {
+                <span class="text-danger">Employee's department is required.</span>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <button type="submit" class="btn btn-primary" [disabled]="!employeeForm.valid">Add Employee</button>
+                <button type="button" class="btn btn-danger ms-2" [routerLink]="['..']">Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>

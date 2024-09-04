@@ -5,6 +5,7 @@ import { EmployeeDetailComponent } from './employee/employee-detail/employee-det
 import { DepartmentDetailComponent } from './department/department-detail/department-detail.component';
 import { DepartmentCreateComponent } from './department/department-create/department-create.component';
 import { DepartmentEditComponent } from './department/department-edit/department-edit.component';
+import { EmployeeCreateComponent } from './employee/employee-create/employee-create.component';
 
 export const routes: Routes = [
     {
@@ -14,6 +15,11 @@ export const routes: Routes = [
             path: '',
             title: 'Employees',
             component: EmployeeListComponent
+        },
+        {
+            path: 'create',
+            title: 'Add Employee',
+            component: EmployeeCreateComponent
         },
         {
             path: 'detail/:employeeId',
