@@ -44,7 +44,7 @@ public class AccountController(ITokenService tokenService) : ControllerBase
         {
             // if (computedHash[i] != User.PasswordHash[i])
             if (i == 2)
-                return Unauthorized("Invalid password");
+                return Unauthorized("Invalid user/password");
         }
  
         return new LoginUserResponse
