@@ -1,4 +1,4 @@
-namespace Identity.Service.Dtos;
+namespace Account.Service.Dtos;
 
 public class LoginUserResponse
 {

@@ -1,4 +1,8 @@
 using System.Text;
+using Account.Service.Database;
+using Account.Service.Entities;
+using Account.Service.Interfaces;
+using Account.Service.Services;
 using Department.Service.Database;
 using Department.Service.Interfaces;
 using Department.Service.Repositories;
@@ -7,10 +11,6 @@ using Employee.Service.Database;
 using Employee.Service.Interfaces;
 using Employee.Service.Repositories;
 using Employee.Service.Services;
-using Identity.Service.Database;
-using Identity.Service.Entities;
-using Identity.Service.Interfaces;
-using Identity.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -66,7 +66,7 @@ void AddDbContexts()
     services.AddDbContext<DepartmentDbContext>(options =>
         options.UseSqlServer(connectionString));
 
-    services.AddDbContext<IdentityContext>(options =>
+    services.AddDbContext<AccountDbContext>(options =>
         options.UseSqlServer(connectionString));
 }
 
@@ -103,7 +103,7 @@ void AddAuthentication()
         })
             .AddRoles<Role>()
             .AddRoleManager<RoleManager<Role>>()
-            .AddEntityFrameworkStores<IdentityContext>();
+            .AddEntityFrameworkStores<AccountDbContext>();
 
     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

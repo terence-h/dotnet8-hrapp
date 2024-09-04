@@ -1,9 +1,8 @@
 using System.Security.Cryptography;
 using System.Text;
+using Account.Service.Dtos;
+using Account.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Identity.Service.Interfaces;
-using Identity.Service.Dtos;
-using Identity.Service.Entities;
 
 namespace dotnet8_hrapp.server.Controllers;
 
@@ -16,7 +15,7 @@ public class AccountController(ITokenService tokenService) : ControllerBase
     {
         using var hmac = new HMACSHA512();
 
-        var user = new User
+        var user = new Account.Service.Entities.User
         {
             UserName = request.Username,
             PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password)).ToString(),
@@ -33,7 +32,7 @@ public class AccountController(ITokenService tokenService) : ControllerBase
     public async Task<ActionResult<LoginUserResponse>> Login(LoginUserRequest request)
     {
         // find user in repository first
-        var user = new User {
+        var user = new Account.Service.Entities.User {
             UserName = "test",
         };
 

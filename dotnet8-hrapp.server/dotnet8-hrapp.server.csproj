@@ -27,7 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="Services\Department.Service\_Department.Service.csproj" />
     <ProjectReference Include="Services\Employee.Service\_Employee.Service.csproj" />
-    <ProjectReference Include="Services\Identity.Service\_Identity.Service.csproj" />
+    <ProjectReference Include="Services\Account.Service\_Account.Service.csproj" />
   </ItemGroup>
 
 </Project>
