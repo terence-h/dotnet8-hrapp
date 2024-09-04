@@ -1,3 +1,4 @@
+using System.Text;
 using Department.Service.Database;
 using Department.Service.Interfaces;
 using Department.Service.Repositories;
@@ -6,7 +7,14 @@ using Employee.Service.Database;
 using Employee.Service.Interfaces;
 using Employee.Service.Repositories;
 using Employee.Service.Services;
+using Identity.Service.Database;
+using Identity.Service.Entities;
+using Identity.Service.Interfaces;
+using Identity.Service.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -17,28 +25,33 @@ var connectionString = configuration.GetConnectionString("Default");
 AddDbContexts();
 AddServices();
 AddAutoMapper();
+AddAuthentication();
+
 services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-// services.AddEndpointsApiExplorer();
-// services.AddSwaggerGen(config =>
-// {
-//     // use fully qualified object names
-//     config.CustomSchemaIds(x => x.FullName);
-// });
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen(config =>
+{
+    // use fully qualified object names
+    config.CustomSchemaIds(x => x.FullName);
+});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-// if (app.Environment.IsDevelopment())
-// {
-//     app.UseSwagger();
-//     app.UseSwaggerUI();
-// }
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 AddCors();
 
 app.UseHttpsRedirection();
 
+// Order matters and must be before map controllers
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -52,6 +65,9 @@ void AddDbContexts()
 
     services.AddDbContext<DepartmentDbContext>(options =>
         options.UseSqlServer(connectionString));
+
+    services.AddDbContext<IdentityContext>(options =>
+        options.UseSqlServer(connectionString));
 }
 
 void AddServices()
@@ -61,6 +77,8 @@ void AddServices()
 
     services.AddScoped<IDepartmentService, DepartmentService>();
     services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+    services.AddScoped<ITokenService, TokenService>();
 }
 
 void AddAutoMapper()
@@ -70,9 +88,33 @@ void AddAutoMapper()
         typeof(IDepartmentService).Assembly);
 }
 
-void AddCors() {
+void AddCors()
+{
     services.AddCors();
-    app.UseCors(x => x.AllowAnyHeader()
-                    .AllowAnyMethod()
+    app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials()
                     .WithOrigins("http://localhost:4200", "https://localhost:4200"));
+}
+
+void AddAuthentication()
+{
+    services.AddIdentityCore<User>(opt =>
+        {
+            opt.Password.RequireNonAlphanumeric = false;
+        })
+            .AddRoles<Role>()
+            .AddRoleManager<RoleManager<Role>>()
+            .AddEntityFrameworkStores<IdentityContext>();
+
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        var tokenKey = configuration["TokenKey"] ?? throw new Exception("Token key not found");
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
 }
