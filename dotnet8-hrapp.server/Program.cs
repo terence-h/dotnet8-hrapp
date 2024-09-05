@@ -31,20 +31,20 @@ services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 services.AddEndpointsApiExplorer();
-services.AddSwaggerGen(config =>
-{
-    // use fully qualified object names
-    config.CustomSchemaIds(x => x.FullName);
-});
+// services.AddSwaggerGen(config =>
+// {
+//     // use fully qualified object names
+//     config.CustomSchemaIds(x => x.FullName);
+// });
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// if (app.Environment.IsDevelopment())
+// {
+//     app.UseSwagger();
+//     app.UseSwaggerUI();
+// }
 
 AddCors();
 
