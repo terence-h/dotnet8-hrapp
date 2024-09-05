@@ -1,10 +1,13 @@
 using Account.Service.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Account.Service.Database;
 
-public class AccountDbContext(DbContextOptions options) : IdentityDbContext<User, Role, int>(options)
+public class AccountDbContext(DbContextOptions options) : IdentityDbContext<User, Role, int, IdentityUserClaim<int>,
+                                                            UserRole, IdentityUserLogin<int>,
+                                                            IdentityRoleClaim<int>, IdentityUserToken<int>>(options)
 {
     protected override void OnModelCreating(ModelBuilder builder)
     {
