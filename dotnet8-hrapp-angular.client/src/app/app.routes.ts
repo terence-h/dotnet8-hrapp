@@ -7,54 +7,72 @@ import { DepartmentCreateComponent } from './department/department-create/depart
 import { DepartmentEditComponent } from './department/department-edit/department-edit.component';
 import { EmployeeCreateComponent } from './employee/employee-create/employee-create.component';
 import { EmployeeEditComponent } from './employee/employee-edit/employee-edit.component';
+import { LoginComponent } from './account/login/login.component';
+import { authGuard } from './_guards/auth.guard';
+import { adminGuard } from './_guards/admin.guard';
 
 export const routes: Routes = [
     {
+        path: '',
+        title: "Homepage",
+        component: LoginComponent
+    },
+    {
+        runGuardsAndResolvers: 'always',
         path: 'employee',
         children: [
         {
             path: '',
             title: 'Employees',
-            component: EmployeeListComponent
+            component: EmployeeListComponent,
+            canActivate: [authGuard]
         },
         {
             path: 'create',
             title: 'Add Employee',
-            component: EmployeeCreateComponent
+            component: EmployeeCreateComponent,
+            canActivate: [adminGuard]
         },
         {
             path: 'edit/:employeeId',
             title: 'Edit Employee',
-            component: EmployeeEditComponent
+            component: EmployeeEditComponent,
+            canActivate: [adminGuard]
         },
         {
             path: 'detail/:employeeId',
             title: 'View Employee Detail',
             component: EmployeeDetailComponent,
+            canActivate: [authGuard]
         },]
     },
     {
+        runGuardsAndResolvers: 'always',
         path: 'department',
         children: [
         {
             path: '',
             title: 'Departments',
-            component: DepartmentListComponent
+            component: DepartmentListComponent,
+            canActivate: [authGuard]
         },
         {
             path: 'create',
             title: 'Add Department',
-            component: DepartmentCreateComponent
+            component: DepartmentCreateComponent,
+            canActivate: [adminGuard]
         },
         {
             path: 'edit/:departmentId',
             title: 'Edit Department',
-            component: DepartmentEditComponent
+            component: DepartmentEditComponent,
+            canActivate: [adminGuard]
         },
         {
             path: 'detail/:departmentId',
             title: 'View Department Detali',
-            component: DepartmentDetailComponent
+            component: DepartmentDetailComponent,
+            canActivate: [authGuard]
         }]
     }
 ];

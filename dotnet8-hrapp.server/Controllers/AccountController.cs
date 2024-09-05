@@ -2,6 +2,7 @@ using Account.Service.Dtos;
 using Account.Service.Entities;
 using Account.Service.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ namespace dotnet8_hrapp.server.Controllers;
 [ApiController]
 public class AccountController(ITokenService tokenService, UserManager<User> userManager, IMapper mapper) : ControllerBase
 {
+    [Authorize(Policy = "Admin")]
     [HttpPost("register")] // api/account/register
     public async Task<ActionResult<LoginUserResponse>> Register(CreateUserRequest request)
     {
@@ -27,6 +29,8 @@ public class AccountController(ITokenService tokenService, UserManager<User> use
         if (!result.Succeeded)
             return BadRequest(result.Errors);
 
+        await userManager.AddToRoleAsync(user, "User");
+        
         return new LoginUserResponse
         {
             Username = user.UserName,
@@ -34,22 +38,23 @@ public class AccountController(ITokenService tokenService, UserManager<User> use
         };
     }
 
+    [AllowAnonymous]
     [HttpPost("login")]
     public async Task<ActionResult<LoginUserResponse>> Login(LoginUserRequest request)
     {
         var user = await userManager.Users.FirstOrDefaultAsync(x => x.NormalizedUserName == request.Username.ToUpper());
 
         if (user == null || user.UserName == null)
-            return Unauthorized("Username does not exist");
+            return Unauthorized(new { Message = "Invalid username/password" });
 
         bool correctPassword = await userManager.CheckPasswordAsync(user, request.Password);
 
         if (!correctPassword)
-            return Unauthorized("Password does not match username");
+            return Unauthorized(new { Message = "Invalid username/password" });
 
         return new LoginUserResponse {
             Username = user.UserName,
-            Token = await tokenService.CreateToken(user)
+            Token = await tokenService.CreateToken(user),
         };
     }
 

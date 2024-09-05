@@ -16,9 +16,6 @@
                     </div>
                 </div>
                 }
-                @else {
-                <p>Loading...</p>
-                }
             </accordion-group>
             <accordion-group heading="List of Employees" [isOpen]="true">
                 @if(onInitFinished) {
@@ -51,9 +48,6 @@
                         </table>
                     </div>
                 </div>
-                }
-                @else {
-                <p>Loading...</p>
                 }
             </accordion-group>
         </accordion>

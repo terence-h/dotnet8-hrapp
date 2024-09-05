@@ -1,0 +1,21 @@
+<div class="form-signin w-100 m-auto">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+        <div class="text-center">
+            <img class="mb-1" ngSrc="logo.png" alt="App Logo" width="125" height="125" priority />
+        </div>
+        <div class="form-floating">
+            <input [formControl]="loginForm.controls.username" type="text" class="form-control" id="floatingUsername"
+                placeholder="Username">
+            <label for="floatingUsername">Username</label>
+        </div>
+        <div class="form-floating">
+            <input [formControl]="loginForm.controls.password" type="password" class="form-control"
+                id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div>
+        <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+    </form>
+    @if(this.loginErrorMsg.length > 0) {
+    <alert type="danger mt-1">{{this.loginErrorMsg}}</alert>
+    }
+</div>

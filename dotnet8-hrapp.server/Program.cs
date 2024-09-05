@@ -1,4 +1,5 @@
 using System.Text;
+using Account.Service.Data;
 using Account.Service.Database;
 using Account.Service.Entities;
 using Account.Service.Interfaces;
@@ -55,6 +56,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using var scope = app.Services.CreateScope();
+SeedDataOnFirstRun(scope.ServiceProvider);
 
 app.Run();
 
@@ -118,4 +122,27 @@ void AddAuthentication()
             ValidateAudience = false
         };
     });
+
+    services.AddAuthorizationBuilder()
+            .AddPolicy("Admin", policy => policy.RequireRole("Admin"))
+            .AddPolicy("UserAndAbove", policy => policy.RequireRole("Admin", "User"));
+}
+
+async void SeedDataOnFirstRun(IServiceProvider service)
+{
+    try
+    {
+        var accountDbContext = service.GetRequiredService<AccountDbContext>();
+        var employeeDbContext = service.GetRequiredService<EmployeeDbContext>();
+        var userManager = service.GetRequiredService<UserManager<User>>();
+        var roleManager = service.GetRequiredService<RoleManager<Role>>();
+        await accountDbContext.Database.MigrateAsync();
+        await employeeDbContext.Database.MigrateAsync();
+        await DataSeed.SeedDefaultAccountsAndRoles(userManager, roleManager);
+    }
+    catch (Exception ex)
+    {
+        var logger = service.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred during database migration.");
+    }
 }

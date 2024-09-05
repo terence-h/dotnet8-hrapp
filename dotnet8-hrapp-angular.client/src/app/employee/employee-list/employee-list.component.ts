@@ -1,15 +1,17 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { EmployeeService } from '../shared/employee.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { EmployeeList } from '../shared/employee-list.interface';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { EmployeeDeleteComponent } from '../employee-delete/employee-delete.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { AccountService } from '../../account/shared/account.service';
+import { HasRoleDirective } from '../../_directives/has-role.directive';
 
 @Component({
   selector: 'app-employee-list',
   standalone: true,
-  imports: [RouterLink, AlertModule],
+  imports: [RouterLink, AlertModule, HasRoleDirective],
   providers: [BsModalService],
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.scss'
@@ -17,6 +19,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 
 export class EmployeeListComponent implements OnInit {
   employeeService = inject(EmployeeService);
+  accountService = inject(AccountService);
+  router = inject(Router);
   modalService = inject(BsModalService);
   employees!: EmployeeList[];
   onInitFinished = false;
@@ -25,6 +29,9 @@ export class EmployeeListComponent implements OnInit {
   @Input() modalRef?: BsModalRef;
 
   ngOnInit(): void {
+    if (!this.accountService.currentUser())
+      this.router.navigate(['/']);
+
     this.getEmployees();
   }
 
@@ -37,7 +44,7 @@ export class EmployeeListComponent implements OnInit {
           employeeName: employeeName,
         }
       };
-      
+
       this.modalRef = this.modalService.show(EmployeeDeleteComponent, config);
 
       this.modalRef.content.evtEmployeeDelete.subscribe((data: number) => {
@@ -50,7 +57,7 @@ export class EmployeeListComponent implements OnInit {
 
   getEmployees() {
     this.employeeService.getEmployees().subscribe({
-      next: response => {this.employees = response; this.onInitFinished = true;},
+      next: response => { this.employees = response; this.onInitFinished = true; },
       error: error => console.log(error)
     });
   }

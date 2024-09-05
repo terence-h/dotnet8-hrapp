@@ -1,22 +1,35 @@
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="">dotnet8-hrapp</a>
+<nav class="navbar navbar-expand-lg mb-5">
+  <div class="container-md">
+    <a class="navbar-brand">Hello HR App</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBar"
       aria-controls="navBar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navBar">
-      <div class="navbar-nav">
-        <a class="nav-link" aria-current="page" routerLink="" routerLinkActive="active">Home</a>
-        <a class="nav-link" routerLink="employee" routerLinkActive="active">Employees</a>
-        <a class="nav-link" routerLink="department" routerLinkActive="active">Departments</a>
-        <div class="ms-5">
+      @if(this.accountService.currentUser() != null) {
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="employee" routerLinkActive="active">Employees</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="department" routerLinkActive="active">Departments</a>
+        </li>
+      </ul>
+      }
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
           <div class="form-check form-switch nav-link">
-            <input class="form-check-input" type="checkbox" role="switch" id="toggleLightDarkMode" (change)="onToggleLightDarkmode()" [checked]="isDarkMode">
+            <input class="form-check-input" type="checkbox" role="switch" id="toggleLightDarkMode"
+              (change)="onToggleLightDarkmode()" [checked]="isDarkMode">
             <label class="form-check-label" for="toggleLightDarkMode">Toggle Light/Dark Mode</label>
           </div>
-        </div>
-      </div>
+        </li>
+        @if(this.accountService.currentUser() != null) {
+        <li class="nav-item ms-5" *appIsLoggedIn="true">
+          <button class="btn nav-link" (click)="logout()">Logout</button>
+        </li>
+        }
+      </ul>
     </div>
   </div>
 </nav>

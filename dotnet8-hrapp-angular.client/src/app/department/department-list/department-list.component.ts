@@ -6,11 +6,12 @@ import { DepartmentDeleteComponent } from '../department-delete/department-delet
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { IEmployeeDetail } from '../../employee/shared/employee-detail.interface';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { HasRoleDirective } from '../../_directives/has-role.directive';
 
 @Component({
   selector: 'app-department-list',
   standalone: true,
-  imports: [RouterLink, AlertModule],
+  imports: [RouterLink, AlertModule, HasRoleDirective],
   providers: [BsModalService],
   templateUrl: './department-list.component.html',
   styleUrl: './department-list.component.scss'
@@ -38,7 +39,7 @@ export class DepartmentListComponent implements OnInit {
           employees: employees
         }
       };
-      
+
       this.modalRef = this.modalService.show(DepartmentDeleteComponent, config);
 
       this.modalRef.content.evtDepartmentDelete.subscribe((data: number) => {
