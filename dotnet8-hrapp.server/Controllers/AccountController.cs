@@ -1,25 +1,31 @@
-using System.Security.Cryptography;
-using System.Text;
 using Account.Service.Dtos;
+using Account.Service.Entities;
 using Account.Service.Interfaces;
+using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotnet8_hrapp.server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AccountController(ITokenService tokenService) : ControllerBase
+public class AccountController(ITokenService tokenService, UserManager<User> userManager, IMapper mapper) : ControllerBase
 {
     [HttpPost("register")] // api/account/register
     public async Task<ActionResult<LoginUserResponse>> Register(CreateUserRequest request)
     {
-        using var hmac = new HMACSHA512();
+        if (await UserExists(request.Username))
+            return BadRequest("Username already exists!");
 
-        var user = new Account.Service.Entities.User
-        {
-            UserName = request.Username,
-            PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password)).ToString(),
-        };
+        var user = mapper.Map<User>(request);
+
+        user.UserName = request.Username.ToLower();
+
+        var result = await userManager.CreateAsync(user, request.Password);
+
+        if (!result.Succeeded)
+            return BadRequest(result.Errors);
 
         return new LoginUserResponse
         {
@@ -31,26 +37,24 @@ public class AccountController(ITokenService tokenService) : ControllerBase
     [HttpPost("login")]
     public async Task<ActionResult<LoginUserResponse>> Login(LoginUserRequest request)
     {
-        // find user in repository first
-        var user = new Account.Service.Entities.User {
-            UserName = "test",
-        };
+        var user = await userManager.Users.FirstOrDefaultAsync(x => x.NormalizedUserName == request.Username.ToUpper());
 
-        using var hmac = new HMACSHA512();
+        if (user == null || user.UserName == null)
+            return Unauthorized("Username does not exist");
 
-        var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("enter_password_here"));
+        bool correctPassword = await userManager.CheckPasswordAsync(user, request.Password);
 
-        for (int i = 0; i < computedHash.Length; i++)
-        {
-            // if (computedHash[i] != User.PasswordHash[i])
-            if (i == 2)
-                return Unauthorized("Invalid user/password");
-        }
- 
-        return new LoginUserResponse
-        {
-            Username = request.Username,
+        if (!correctPassword)
+            return Unauthorized("Password does not match username");
+
+        return new LoginUserResponse {
+            Username = user.UserName,
             Token = await tokenService.CreateToken(user)
         };
+    }
+
+    private async Task<bool> UserExists(string userName)
+    {
+        return await userManager.Users.AnyAsync(x => x.NormalizedUserName == userName.ToUpper());
     }
 }

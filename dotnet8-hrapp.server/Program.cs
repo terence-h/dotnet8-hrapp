@@ -85,7 +85,8 @@ void AddAutoMapper()
 {
     services.AddAutoMapper(
         typeof(IEmployeeService).Assembly,
-        typeof(IDepartmentService).Assembly);
+        typeof(IDepartmentService).Assembly,
+        typeof(ITokenService).Assembly);
 }
 
 void AddCors()

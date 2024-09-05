@@ -4,8 +4,8 @@ namespace Account.Service.Dtos;
 
 public class CreateUserRequest
 {
-    [MaxLength(100)]
+    [StringLength(24, MinimumLength = 4)]
     public required string Username { get ;set; }
-    [MaxLength(50)]
+    [StringLength(24, MinimumLength = 8)]
     public required string Password{ get; set; }
 }
