@@ -10,7 +10,7 @@ namespace dotnet8_hrapp.server.Controllers;
 public class DepartmentController(IDepartmentService departmentService) : ControllerBase
 {
     // GET: api/Department
-    [Authorize(Policy = "UserAndAbove")]
+    [Authorize(Policy = "RequireUser")]
     [HttpGet]
     public async Task<IActionResult> SearchDepartments()
     {
@@ -20,7 +20,7 @@ public class DepartmentController(IDepartmentService departmentService) : Contro
     }
 
     // GET api/Department/5
-    [Authorize(Policy = "UserAndAbove")]
+    [Authorize(Policy = "RequireUser")]
     [HttpGet("{departmentId}")]
     public async Task<IActionResult> GetDepartment(int departmentId)
     {
@@ -30,7 +30,7 @@ public class DepartmentController(IDepartmentService departmentService) : Contro
     }
 
     // POST api/Department
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = "RequireAdmin")]
     [HttpPost]
     public async Task<IActionResult> CreateDepartment([FromBody] CreateDepartmentRequest request)
     {
@@ -40,7 +40,7 @@ public class DepartmentController(IDepartmentService departmentService) : Contro
     }
 
     // PUT api/Department/5
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = "RequireAdmin")]
     [HttpPut("{departmentId}")]
     public async Task<IActionResult> UpdateDepartment(int departmentId, [FromBody] UpdateDepartmentRequest request)
     {
@@ -50,7 +50,7 @@ public class DepartmentController(IDepartmentService departmentService) : Contro
     }
 
     // DELETE api/Department/5
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = "RequireAdmin")]
     [HttpDelete("{departmentId}")]
     public async Task<IActionResult> DeleteDepartment(int departmentId)
     {

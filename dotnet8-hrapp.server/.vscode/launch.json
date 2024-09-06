@@ -10,11 +10,11 @@
             "cwd": "${workspaceFolder}",
             "launchSettingsFilePath": "${workspaceFolder}/Properties/launchSettings.json",
             "launchSettingsProfile": "https",
-            // "serverReadyAction": {
-            //     "action": "openExternally",
-            //     "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
-            //     "uriFormat": "%s/swagger"
-            // },
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+                "uriFormat": "%s/swagger"
+            },
         }
     ]
 }

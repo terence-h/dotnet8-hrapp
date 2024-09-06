@@ -10,7 +10,7 @@ namespace dotnet8_hrapp.server.Controllers;
 public class EmployeeController(IEmployeeService employeeService) : ControllerBase
 {
     // GET: api/Employee
-    [Authorize(Policy = "UserAndAbove")]
+    [Authorize(Policy = "RequireUser")]
     [HttpGet]
     public async Task<IActionResult> SearchEmployees()
     {
@@ -20,7 +20,7 @@ public class EmployeeController(IEmployeeService employeeService) : ControllerBa
     }
 
     // GET api/Employee/5
-    [Authorize(Policy = "UserAndAbove")]
+    [Authorize(Policy = "RequireUser")]
     [HttpGet("{employeeId}")]
     public async Task<IActionResult> GetEmployee(int employeeId)
     {
@@ -30,7 +30,7 @@ public class EmployeeController(IEmployeeService employeeService) : ControllerBa
     }
 
     // POST api/Employee
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = "RequireAdmin")]
     [HttpPost]
     public async Task<IActionResult> CreateEmployee([FromBody] CreateEmployeeRequest request)
     {
@@ -40,7 +40,7 @@ public class EmployeeController(IEmployeeService employeeService) : ControllerBa
     }
 
     // PUT api/Employee/5
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = "RequireAdmin")]
     [HttpPut("{employeeId}")]
     public async Task<IActionResult> UpdateEmployee(int employeeId, [FromBody] UpdateEmployeeRequest request)
     {
@@ -49,7 +49,7 @@ public class EmployeeController(IEmployeeService employeeService) : ControllerBa
     }
 
     // DELETE api/Employee/5
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = "RequireAdmin")]
     [HttpDelete("{employeeId}")]
     public async Task<IActionResult> DeleteEmployee(int employeeId)
     {
