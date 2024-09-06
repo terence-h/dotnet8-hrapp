@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 @if (departments.length > 0) {
-                @for(department of departments; track department.departmentId) {
+                @for(department of displayedDepartments; track department.departmentId) {
                 <tr>
                     <td>{{department.departmentId}}</td>
                     <td>{{department.departmentName}}</td>
@@ -41,6 +41,14 @@
             </tbody>
         </table>
     </div>
+    @if (departments.length > 0) {
+        <div class="row justify-content-center">
+          <div class="col-4">
+            <pagination [totalItems]="departments.length" [itemsPerPage]="pageSize" (pageChanged)="pageChanged($event)">
+            </pagination>
+          </div>
+        </div>
+        }
     @if (onDeleted) {
     <alert type="success">
         Department has been deleted successfully.
