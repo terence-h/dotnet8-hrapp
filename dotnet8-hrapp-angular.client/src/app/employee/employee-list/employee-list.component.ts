@@ -7,11 +7,14 @@ import { EmployeeDeleteComponent } from '../employee-delete/employee-delete.comp
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { AccountService } from '../../account/shared/account.service';
 import { HasRoleDirective } from '../../_directives/has-role.directive';
+import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
+import { FormsModule } from '@angular/forms';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-employee-list',
   standalone: true,
-  imports: [RouterLink, AlertModule, HasRoleDirective],
+  imports: [RouterLink, FormsModule, AlertModule, PaginationModule, HasRoleDirective],
   providers: [BsModalService],
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.scss'
@@ -23,8 +26,11 @@ export class EmployeeListComponent implements OnInit {
   router = inject(Router);
   modalService = inject(BsModalService);
   employees!: EmployeeList[];
+  displayedEmployees!: EmployeeList[];
   onInitFinished = false;
   onDeleted = false;
+  page?: number;
+  pageSize: number = environment.paginationSize;
 
   @Input() modalRef?: BsModalRef;
 
@@ -33,6 +39,14 @@ export class EmployeeListComponent implements OnInit {
       this.router.navigate(['/']);
 
     this.getEmployees();
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    this.page = event.page;
+
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.displayedEmployees = this.employees.slice(startItem, endItem);
   }
 
   openModal(employeeId: number, employeeName: string) {
@@ -57,7 +71,12 @@ export class EmployeeListComponent implements OnInit {
 
   getEmployees() {
     this.employeeService.getEmployees().subscribe({
-      next: response => { this.employees = response; this.onInitFinished = true; },
+      next: response => {
+        this.page = 1;
+        this.employees = response;
+        this.displayedEmployees = response.slice(0, this.pageSize);
+        this.onInitFinished = true;
+      },
       error: error => console.log(error)
     });
   }

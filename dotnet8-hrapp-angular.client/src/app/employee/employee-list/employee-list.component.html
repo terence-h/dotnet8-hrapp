@@ -19,7 +19,7 @@
       </thead>
       <tbody>
         @if (employees.length > 0) {
-        @for(employee of employees; track employee.id) {
+        @for(employee of displayedEmployees; track employee.id) {
         <tr>
           <td>{{employee.id}}</td>
           <td>{{employee.name}}</td>
@@ -40,6 +40,14 @@
       </tbody>
     </table>
   </div>
+  @if (employees.length > 0) {
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <pagination [totalItems]="employees.length" [itemsPerPage]="pageSize" (pageChanged)="pageChanged($event)">
+      </pagination>
+    </div>
+  </div>
+  }
   @if (onDeleted) {
   <alert type="success">
     Employee information has been deleted successfully.
