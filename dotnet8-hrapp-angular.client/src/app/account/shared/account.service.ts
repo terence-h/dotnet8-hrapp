@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { map } from 'rxjs';
-import { User } from './user.interface';
+import { User } from './account.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,17 +18,6 @@ export class AccountService {
     }
     return [];
   })
-
-  register(model: any) {
-    return this.http.post<User>(`${environment.apiUrl}/account/register`, model).pipe(
-      map(user => {
-        if (user) {
-          this.setCurrentUser(user);
-        }
-        return user;
-      })
-    )
-  }
 
   login(model: any) {
     return this.http.post<User>(`${environment.apiUrl}/account/login`, model).pipe(

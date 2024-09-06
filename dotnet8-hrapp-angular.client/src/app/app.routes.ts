@@ -10,6 +10,8 @@ import { EmployeeEditComponent } from './employee/employee-edit/employee-edit.co
 import { LoginComponent } from './account/login/login.component';
 import { authGuard } from './_guards/auth.guard';
 import { adminGuard } from './_guards/admin.guard';
+import { UserListComponent } from './admin/user-list/user-list.component';
+import { RegisterComponent } from './admin/register/register.component';
 
 export const routes: Routes = [
     {
@@ -21,58 +23,80 @@ export const routes: Routes = [
         runGuardsAndResolvers: 'always',
         path: 'employee',
         children: [
-        {
-            path: '',
-            title: 'Employees',
-            component: EmployeeListComponent,
-            canActivate: [authGuard]
-        },
-        {
-            path: 'create',
-            title: 'Add Employee',
-            component: EmployeeCreateComponent,
-            canActivate: [adminGuard]
-        },
-        {
-            path: 'edit/:employeeId',
-            title: 'Edit Employee',
-            component: EmployeeEditComponent,
-            canActivate: [adminGuard]
-        },
-        {
-            path: 'detail/:employeeId',
-            title: 'View Employee Detail',
-            component: EmployeeDetailComponent,
-            canActivate: [authGuard]
-        },]
+            {
+                path: '',
+                title: 'Employees',
+                component: EmployeeListComponent,
+                canActivate: [authGuard]
+            },
+            {
+                path: 'create',
+                title: 'Add Employee',
+                component: EmployeeCreateComponent,
+                canActivate: [adminGuard]
+            },
+            {
+                path: 'edit/:employeeId',
+                title: 'Edit Employee',
+                component: EmployeeEditComponent,
+                canActivate: [adminGuard]
+            },
+            {
+                path: 'detail/:employeeId',
+                title: 'View Employee Detail',
+                component: EmployeeDetailComponent,
+                canActivate: [authGuard]
+            },]
     },
     {
         runGuardsAndResolvers: 'always',
         path: 'department',
         children: [
-        {
-            path: '',
-            title: 'Departments',
-            component: DepartmentListComponent,
-            canActivate: [authGuard]
-        },
-        {
-            path: 'create',
-            title: 'Add Department',
-            component: DepartmentCreateComponent,
-            canActivate: [adminGuard]
-        },
-        {
-            path: 'edit/:departmentId',
-            title: 'Edit Department',
-            component: DepartmentEditComponent,
-            canActivate: [adminGuard]
-        },
-        {
-            path: 'detail/:departmentId',
-            title: 'View Department Detali',
-            component: DepartmentDetailComponent,
-            canActivate: [authGuard]
-        }]
+            {
+                path: '',
+                title: 'Departments',
+                component: DepartmentListComponent,
+                canActivate: [authGuard]
+            },
+            {
+                path: 'create',
+                title: 'Add Department',
+                component: DepartmentCreateComponent,
+                canActivate: [adminGuard]
+            },
+            {
+                path: 'edit/:departmentId',
+                title: 'Edit Department',
+                component: DepartmentEditComponent,
+                canActivate: [adminGuard]
+            },
+            {
+                path: 'detail/:departmentId',
+                title: 'View Department Detali',
+                component: DepartmentDetailComponent,
+                canActivate: [authGuard]
+            }]
+    },
+    {
+        runGuardsAndResolvers: 'always',
+        path: 'admin',
+        canActivate: [adminGuard],
+        children: [
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'userlist',
+            },
+            {
+                path: 'userlist',
+                title: 'Users',
+                component: UserListComponent
+            },
+            {
+                path: 'createuser',
+                title: 'Add User',
+                component: RegisterComponent
+            }
+        ]
     }
 ];

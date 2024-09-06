@@ -1,0 +1,48 @@
+@if (onInitFinished) {
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <button type="button" class="btn btn-primary" [routerLink]="['../createuser']">
+                Add User
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">User ID</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">User Roles</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (users.length > 0) {
+                @for(user of users; track user.id) {
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.roles}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-link" [routerLink]="['./detail', user.id]">View</a>
+                        <a class="btn btn-sm btn-link"[routerLink]="['./edit', user.id]">Edit</a>
+                        <!-- <a class="btn btn-sm btn-link" (click)="openModal(user.id, user.username)">Delete</a> -->
+                    </td>
+                </tr>
+                }
+                } @else {
+                <tr>
+                    <td colspan="4">No user records</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (onDeleted) {
+    <alert type="success">
+        User information has been deleted successfully.
+    </alert>
+    }
+</div>
+}
