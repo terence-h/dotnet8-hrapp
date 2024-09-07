@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DepartmentService } from '../shared/department.service';
+import { DepartmentList } from '../shared/department.interface';
 
 @Component({
   selector: 'app-department-edit',
@@ -13,9 +14,9 @@ import { DepartmentService } from '../shared/department.service';
 export class DepartmentEditComponent implements OnInit {
   router = inject(Router);
   route = inject(ActivatedRoute);
-  currentValues: any;
+  currentValues!: DepartmentList;
   departmentService = inject(DepartmentService);
-  departmentForm: any;
+  departmentForm!: FormGroup<{ departmentId: FormControl<number | null>; departmentName: FormControl<string | null>; }>;
   onInitFinished = false;
 
   ngOnInit(): void {

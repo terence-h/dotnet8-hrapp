@@ -1,7 +1,7 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { EmployeeService } from '../shared/employee.service';
 import { Router, RouterLink } from '@angular/router';
-import { EmployeeList } from '../shared/employee-list.interface';
+import { EmployeeList } from '../shared/employee.interface';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { EmployeeDeleteComponent } from '../employee-delete/employee-delete.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
@@ -49,7 +49,12 @@ export class EmployeeListComponent implements OnInit {
     this.displayedEmployees = this.employees.slice(startItem, endItem);
   }
 
-  openModal(employeeId: number, employeeName: string) {
+  openModal(event:unknown, employeeId: number, employeeName: string) {
+    const evt = (event as KeyboardEvent);
+
+    if (evt.key && evt.key != "Enter")
+        return;
+
     if (employeeId > 0) {
       const config: ModalOptions = {
         class: 'modal-dialog-centered',
@@ -83,7 +88,7 @@ export class EmployeeListComponent implements OnInit {
 
   deleteEmployee(employeeId: number) {
     this.employeeService.deleteEmployee(employeeId).subscribe({
-      next: response => {
+      next: () => {
         this.onDeleted = true;
         this.modalRef?.hide();
         this.getEmployees();

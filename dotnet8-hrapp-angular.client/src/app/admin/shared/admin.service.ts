@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class AdminService {
   http = inject(HttpClient);
 
-  register(model: any): Observable<Register> {
+  register(model: unknown): Observable<Register> {
     return this.http.post<Register>(`${environment.apiUrl}/admin/register`, model);
   }
 

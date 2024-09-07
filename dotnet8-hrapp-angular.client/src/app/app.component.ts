@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavigationComponent } from "./shared/navigation/navigation.component";
 import { AccountService } from './account/shared/account.service';
@@ -11,7 +11,7 @@ import { ThemeSwitcherComponent } from './shared/theme-switcher/theme-switcher.c
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   accountService = inject(AccountService);
 
   ngOnInit(): void {

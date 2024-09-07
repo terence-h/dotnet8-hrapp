@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { IEmployeeDetail } from '../../employee/shared/employee-detail.interface';
+import { IEmployeeDetail } from '../../employee/shared/employee.interface';
 
 @Component({
   selector: 'app-department-delete',

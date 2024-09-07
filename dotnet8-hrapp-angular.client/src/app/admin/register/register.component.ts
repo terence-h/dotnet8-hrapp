@@ -14,8 +14,8 @@ import { Router, RouterLink } from '@angular/router';
 export class RegisterComponent implements OnInit {
   adminService = inject(AdminService);
   router = inject(Router);
-  registerForm: any;
-  registerErrorMsg: string = '';
+  registerForm!: FormGroup<{ username: FormControl<string | null>; password: FormControl<string | null>; }>;
+  registerErrorMsg = '';
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
 
   register(): void {
     this.adminService.register(this.registerForm.value).subscribe({
-      next: resp => { this.router.navigate(['../admin/userlist'])},
+      next: () => { this.router.navigate(['../admin/userlist'])},
       error: error => { this.registerErrorMsg = error?.error?.message }
     })
   }

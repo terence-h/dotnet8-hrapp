@@ -6,7 +6,7 @@ import { AccountService } from '../account/shared/account.service';
   standalone: true
 })
 export class IsLoggedInDirective implements OnInit {
-  @Input() appIsLoggedIn: boolean = false;
+  @Input() appIsLoggedIn = false;
 
   private accountService = inject(AccountService);
   private viewContainerRef = inject(ViewContainerRef);

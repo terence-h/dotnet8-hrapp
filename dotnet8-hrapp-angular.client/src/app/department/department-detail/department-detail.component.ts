@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { DepartmentService } from '../shared/department.service';
-import { DepartmentList } from '../shared/department-list.interface';
+import { DepartmentList } from '../shared/department.interface';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AccordionModule } from 'ngx-bootstrap/accordion';

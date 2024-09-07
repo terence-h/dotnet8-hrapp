@@ -1,12 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { DepartmentList } from '../../department/shared/department-list.interface';
+import { DepartmentList } from '../../department/shared/department.interface';
 import { DepartmentService } from '../../department/shared/department.service';
 import { EmployeeCreateEditForm } from '../shared/employee-createedit-form';
 import { EmployeeService } from '../shared/employee.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { IEmployeeDetail } from '../shared/employee-detail.interface';
+import { IEmployeeDetail } from '../shared/employee.interface';
 
 @Component({
   selector: 'app-employee-edit',
@@ -15,7 +15,7 @@ import { IEmployeeDetail } from '../shared/employee-detail.interface';
   templateUrl: './employee-edit.component.html',
   styleUrl: './employee-edit.component.scss'
 })
-export class EmployeeEditComponent {
+export class EmployeeEditComponent implements OnInit {
   router = inject(Router);
   route = inject(ActivatedRoute);
   employeeService = inject(EmployeeService);

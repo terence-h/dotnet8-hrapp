@@ -15,8 +15,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 export class LoginComponent implements OnInit {
   accountService = inject(AccountService);
   router = inject(Router);
-  loginForm: any;
-  loginErrorMsg: string = '';
+  loginForm!: FormGroup<{ username: FormControl<string | null>; password: FormControl<string | null>; }>;
+  loginErrorMsg = '';
 
   ngOnInit(): void {
     if (this.accountService.currentUser()) {
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.accountService.login(this.loginForm.value).subscribe({
-      next: _ => { this.router.navigate(['employee']); },
+      next: () => { this.router.navigate(['employee']); },
       error: error => {
         // console.log(error?.error?.message);
         this.loginErrorMsg = error?.error?.message;

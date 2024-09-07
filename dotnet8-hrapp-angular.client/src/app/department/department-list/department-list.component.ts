@@ -1,10 +1,10 @@
-import { Component, inject, Input, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DepartmentService } from '../shared/department.service';
-import { DepartmentList } from '../shared/department-list.interface';
+import { DepartmentList } from '../shared/department.interface';
 import { DepartmentDeleteComponent } from '../department-delete/department-delete.component';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { IEmployeeDetail } from '../../employee/shared/employee-detail.interface';
+import { IEmployeeDetail } from '../../employee/shared/employee.interface';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { HasRoleDirective } from '../../_directives/has-role.directive';
 import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
@@ -43,7 +43,13 @@ export class DepartmentListComponent implements OnInit {
     this.displayedDepartments = this.departments.slice(startItem, endItem);
   }
 
-  openModal(departmentId: number, departmentName: string, employees: IEmployeeDetail[]) {
+  openModal(event: unknown, departmentId: number, departmentName: string, employees: IEmployeeDetail[]) {
+
+    const evt = (event as KeyboardEvent);
+
+    if (evt.key && evt.key != "Enter")
+        return;
+      
     if (departmentId > 0) {
       const config: ModalOptions = {
         class: 'modal-dialog-centered',
@@ -77,7 +83,7 @@ export class DepartmentListComponent implements OnInit {
 
   deleteDepartment(departmentId: number) {
     this.departmentService.deleteDepartment(departmentId).subscribe({
-      next: response => {
+      next: () => {
         this.onDeleted = true;
         this.modalRef?.hide();
         this.getDepartments();

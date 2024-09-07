@@ -1,10 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DepartmentList } from './department-list.interface';
+import { DepartmentList } from './department.interface';
 import { environment } from '../../../environments/environment.development';
-import { DepartmentCreate } from './department-create.interface';
-import { DepartmentEdit } from './department-edit.interface';
+import { DepartmentCreateEdit } from './department.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,24 +15,25 @@ export class DepartmentService {
     return this.http.get<DepartmentList[]>(`${environment.apiUrl}/department`);
   }
 
-  getDepartment(departmentId: any): Observable<DepartmentList> {
+  getDepartment(departmentId: unknown): Observable<DepartmentList> {
     return this.http.get<DepartmentList>(`${environment.apiUrl}/department/${departmentId}`);
   }
 
-  createDepartment(departmentObj: any): Observable<DepartmentCreate> {
+  createDepartment(departmentObj: unknown): Observable<DepartmentCreateEdit> {
     const httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http.post<DepartmentCreate>(`${environment.apiUrl}/department`, departmentObj, { headers: httpHeaders });
+    return this.http.post<DepartmentCreateEdit>(`${environment.apiUrl}/department`, departmentObj, { headers: httpHeaders });
   }
 
-  updateDepartment(departmentObj: any): Observable<DepartmentEdit> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  updateDepartment(departmentObj: any): Observable<DepartmentCreateEdit> {
     const httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
     const jsonStr = JSON.stringify(departmentObj);
 
-    return this.http.put<DepartmentEdit>(`${environment.apiUrl}/department/${departmentObj.departmentId}`, jsonStr, { headers: httpHeaders });
+    return this.http.put<DepartmentCreateEdit>(`${environment.apiUrl}/department/${departmentObj.departmentId}`, jsonStr, { headers: httpHeaders });
   }
 
-  deleteDepartment(departmentId: any) {
+  deleteDepartment(departmentId: unknown) {
     return this.http.delete(`${environment.apiUrl}/department/${departmentId}`);
   }
 }

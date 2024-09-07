@@ -1,5 +1,5 @@
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { IEmployeeDetail } from "./employee-detail.interface";
+import { IEmployeeDetail } from "./employee.interface";
 
 export function EmployeeCreateEditForm(employee?: IEmployeeDetail) {
     const hasData = employee != null;

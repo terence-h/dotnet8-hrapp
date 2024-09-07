@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { EmployeeService } from '../shared/employee.service';
 import { DepartmentService } from '../../department/shared/department.service';
-import { DepartmentList } from '../../department/shared/department-list.interface';
+import { DepartmentList } from '../../department/shared/department.interface';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { EmployeeCreateEditForm } from '../shared/employee-createedit-form';
 

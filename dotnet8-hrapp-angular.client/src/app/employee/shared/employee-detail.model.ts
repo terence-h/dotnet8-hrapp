@@ -1,5 +1,5 @@
-import { Address } from "./employee-address.interface";
-import { IEmployeeDetail } from "./employee-detail.interface";
+import { Address } from "./employee.interface";
+import { IEmployeeDetail } from "./employee.interface";
 
 export class EmployeeDetail implements IEmployeeDetail {
     id!: number;
@@ -18,8 +18,8 @@ export class EmployeeDetail implements IEmployeeDetail {
     }
 
     getAgeFromDateOfBirth(): number {
-        let today = new Date();
-        let dob = new Date(this.dateOfBirth);
+        const today = new Date();
+        const dob = new Date(this.dateOfBirth);
 
         let age = today.getFullYear() - dob.getFullYear();
         const monthDiff = today.getMonth() - dob.getMonth();

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { EmployeeService } from '../shared/employee.service';
 import { EmployeeDetail } from '../shared/employee-detail.model';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
@@ -23,7 +23,7 @@ export class EmployeeDetailComponent implements OnInit {
 
     this.employeeService.getEmployee(employeeId).subscribe({
       next: response => {
-        let employeeRef: EmployeeDetail = new EmployeeDetail(response);
+        const employeeRef: EmployeeDetail = new EmployeeDetail(response);
         this.employee = employeeRef;
         this.onInitFinished = true;
       },

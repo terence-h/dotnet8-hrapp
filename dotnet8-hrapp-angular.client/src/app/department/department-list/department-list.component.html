@@ -28,8 +28,9 @@
                         <a class="btn btn-sm btn-link" [routerLink]="['./detail', department.departmentId]">View</a>
                         <a *appHasRole="['Admin']" class="btn btn-sm btn-link"
                             [routerLink]="['./edit', department.departmentId]">Edit</a>
-                        <a *appHasRole="['Admin']" class="btn btn-sm btn-link"
-                            (click)="openModal(department.departmentId, department.departmentName, department.employees)">Delete</a>
+                        <a *appHasRole="['Admin']" class="btn btn-sm btn-link" tabindex="0"
+                            (click)="openModal($event, department.departmentId, department.departmentName, department.employees)"
+                            (keydown)="openModal($event, department.departmentId, department.departmentName, department.employees)">Delete</a>
                     </td>
                 </tr>
                 }

@@ -13,7 +13,10 @@ import { Router, RouterLink } from '@angular/router';
 export class DepartmentCreateComponent implements OnInit {
   router = inject(Router);
   departmentService = inject(DepartmentService);
-  departmentForm: any;
+  departmentForm!: FormGroup<{
+    departmentId: FormControl<string | null>;
+    departmentName: FormControl<string | null>;
+  }>;
 
   ngOnInit(): void {
     this.departmentForm = new FormGroup({

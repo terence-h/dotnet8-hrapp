@@ -19,7 +19,7 @@ export class AccountService {
     return [];
   })
 
-  login(model: any) {
+  login(model: unknown) {
     return this.http.post<User>(`${environment.apiUrl}/account/login`, model).pipe(
       map(user => {
         if (user)
