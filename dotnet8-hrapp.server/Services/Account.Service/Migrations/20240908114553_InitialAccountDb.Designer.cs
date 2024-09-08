@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Account.Service.Migrations
 {
     [DbContext(typeof(AccountDbContext))]
-    [Migration("20240905041242_Initial")]
-    partial class Initial
+    [Migration("20240908114553_InitialAccountDb")]
+    partial class InitialAccountDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,6 +75,12 @@ namespace Account.Service.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDisabled")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")

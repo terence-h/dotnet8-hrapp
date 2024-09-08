@@ -1,5 +1,4 @@
-﻿using Employee.Service.Dtos;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Employee.Service.Database;
 
