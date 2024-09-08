@@ -5,7 +5,7 @@ import { EmployeeDetailComponent } from './employee/employee-detail/employee-det
 import { DepartmentDetailComponent } from './department/department-detail/department-detail.component';
 import { DepartmentCreateComponent } from './department/department-create/department-create.component';
 import { DepartmentEditComponent } from './department/department-edit/department-edit.component';
-import { EmployeeCreateComponent } from './employee/employee-create/employee-create.component';
+// import { EmployeeCreateComponent } from './employee/employee-create/employee-create.component';
 import { EmployeeEditComponent } from './employee/employee-edit/employee-edit.component';
 import { LoginComponent } from './account/login/login.component';
 import { authGuard } from './_guards/auth.guard';
@@ -29,12 +29,12 @@ export const routes: Routes = [
                 component: EmployeeListComponent,
                 canActivate: [authGuard]
             },
-            {
-                path: 'create',
-                title: 'Add Employee',
-                component: EmployeeCreateComponent,
-                canActivate: [adminGuard]
-            },
+            // {
+            //     path: 'create',
+            //     title: 'Add Employee',
+            //     component: EmployeeCreateComponent,
+            //     canActivate: [adminGuard]
+            // },
             {
                 path: 'edit/:employeeId',
                 title: 'Edit Employee',

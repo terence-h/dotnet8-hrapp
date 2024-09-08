@@ -2,6 +2,8 @@ using Account.Service.Dtos;
 using Account.Service.Entities;
 using Account.Service.Interfaces;
 using AutoMapper;
+using Employee.Service.Interfaces;
+using Employee.Service.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 namespace dotnet8_hrapp.server.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class AdminController(ITokenService tokenService, UserManager<User> userManager, IMapper mapper) : ControllerBase
+public class AdminController(ITokenService tokenService, UserManager<User> userManager, IEmployeeService employeeService, IMapper mapper) : ControllerBase
 {
     [Authorize(Policy = "RequireAdmin")]
     [HttpGet("userList")]
@@ -37,8 +39,10 @@ public class AdminController(ITokenService tokenService, UserManager<User> userM
             return BadRequest(new { Message = "Username already exists" });
 
         var user = mapper.Map<User>(request);
-
         user.UserName = request.Username.ToLower();
+
+        int employeeId = await employeeService.CreateEmployeeAsync(request.Employee);
+        user.EmployeeId = employeeId;
 
         var result = await userManager.CreateAsync(user, request.Password);
 

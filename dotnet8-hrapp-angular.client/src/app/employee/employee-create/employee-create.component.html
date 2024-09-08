@@ -49,7 +49,7 @@
                 <label for="employeeGender" class="form-label">Gender</label><span class="text-danger">*</span>
                 <input [formControl]="employeeForm.controls.gender" type="text" class="form-control" id="employeeGender"
                     placeholder="Enter employee gender..." maxlength="20">
-                @if (employeeForm.controls.name.hasError('required') && (employeeForm.controls.gender.dirty ||
+                @if (employeeForm.controls.gender.hasError('required') && (employeeForm.controls.gender.dirty ||
                 employeeForm.controls.gender.touched)) {
                 <span class="text-danger">Employee gender is required.</span>
                 }

@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common.Service\_Common.Service.csproj" />
+    <ProjectReference Include="..\Employee.Service\_Employee.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>
