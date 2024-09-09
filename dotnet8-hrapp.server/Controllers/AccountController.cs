@@ -21,6 +21,9 @@ public class AccountController(ITokenService tokenService, UserManager<User> use
         if (user == null || user.UserName == null)
             return Unauthorized(new { Message = "Invalid username/password" });
 
+        if (user.IsDisabled)
+            return Unauthorized(new { Message = "User account is disabled. Please contact system administrator."} );
+
         bool correctPassword = await userManager.CheckPasswordAsync(user, request.Password);
 
         if (!correctPassword)

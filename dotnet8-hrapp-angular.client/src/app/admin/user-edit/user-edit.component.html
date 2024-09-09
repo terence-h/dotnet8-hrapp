@@ -1,0 +1,47 @@
+@if(onInitFinished[0] && onInitFinished[1]) {
+<form [formGroup]="userForm" (ngSubmit)="updateUser()" novalidate>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="mb-3">
+                    <label for="userName" class="form-label">Username</label><span class="text-danger">*</span>
+                    <input [formControl]="userForm.controls.username" type="text" class="form-control" id="userName"
+                        placeholder="Enter new username..." maxlength="24">
+                    @if (userForm.controls.username.hasError('required') &&
+                    (userForm.controls.username.dirty || userForm.controls.username.touched)) {
+                    <span class="text-danger">Username is required.</span>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label for="currentPassword" class="form-label">Current Password</label>
+                    <input [formControl]="userForm.controls.currentPassword" type="password" class="form-control"
+                        id="currentPassword" placeholder="Leave blank to keep current password..." maxlength="24">
+                </div>
+
+                <div class="mb-3">
+                    <label for="newPassword" class="form-label">New Password</label>
+                    <input [formControl]="userForm.controls.newPassword" type="password" class="form-control"
+                        id="newPassword" placeholder="Leave blank to keep current password..." maxlength="24">
+                </div>
+                <label for="roles" class="form-label">Roles</label>
+                <div class="mb-3">
+                    @for(role of roles; track role.id) {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" [name]="role.name" [id]="role.name"
+                            [checked]="currentValues.roles.includes(role.name)" (change)="onCheckboxChange($event)">
+                        <label class="form-check-label" [for]="role.name">
+                            {{role.name}}
+                        </label>
+                    </div>
+                    }
+                    @if (this.rolesInput.length === 0) {
+                    <span class="text-danger">At least one role is required.</span>
+                    }
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Save</button>
+                <button type="button" class="btn btn-danger ms-2" [routerLink]="['../../../user']">Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>
+}

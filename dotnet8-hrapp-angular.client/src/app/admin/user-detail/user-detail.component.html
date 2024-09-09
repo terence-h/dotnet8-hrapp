@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <accordion [isAnimated]="true">
+            <accordion-group heading="User Information" [isOpen]="true">
+                @if(onInitFinished) {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            <strong>User ID</strong>
+                            <p>{{user.id}}</p>
+                        </div>
+                        <div class="col-4">
+                            <strong>Username</strong>
+                            <p>{{user.username}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <strong>Roles</strong>
+                            <p>{{user.roles}}</p>
+                        </div>
+                        <div class="col-4">
+                            <strong>Account Status</strong>
+                            <p>{{user.isDisabled ? 'Disabled' : 'Enabled'}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <strong>Employee ID</strong>
+                            <p><a class="btn-link" [routerLink]="['../../../../employee/detail', user.employeeId]">{{user.employeeId}}</a></p>
+                        </div>
+                    </div>
+                </div>
+                }
+            </accordion-group>
+        </accordion>
+    </div>
+    <button type="button" class="btn btn-danger mt-2" [routerLink]="['../../../user']">Return</button>
+</div>

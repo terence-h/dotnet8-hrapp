@@ -1,0 +1,13 @@
+@if(this.OnInitFinished) {
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Confirm {{accountStatusTextOnConfirm}}?</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to {{accountStatusTextOnConfirm.toLowerCase()}}?</p>
+        <p>User ID: <strong>{{userId}}</strong><br>Username: <strong>{{userName}}</strong></p>
+        <button type="button" class="btn btn-danger" (click)="enableDisableUser()">{{accountStatusTextOnConfirm}}</button>
+    </div>
+}

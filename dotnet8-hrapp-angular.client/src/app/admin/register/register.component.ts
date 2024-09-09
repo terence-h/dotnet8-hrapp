@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
 
   register(): void {
     this.adminService.register(this.registerForm.value).subscribe({
-      next: () => { this.router.navigate(['../admin/userlist'])},
+      next: () => { this.router.navigate(['../admin/user'])},
       error: error => { this.registerErrorMsg = error?.error?.message }
     });
   }

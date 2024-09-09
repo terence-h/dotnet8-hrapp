@@ -28,7 +28,7 @@
         </div>
         <button class="btn btn-primary w-100 py-2" type="button" (click)="toggleFormPart()"
             [disabled]="isFormPartOneInvalid()">Next</button>
-        <button [routerLink]="['../userlist']" class="btn btn-danger w-100 py-2 mt-2" type="button">Cancel</button>
+        <button [routerLink]="['../user']" class="btn btn-danger w-100 py-2 mt-2" type="button">Cancel</button>
     </div>
 
     <div class="form-signin form-signin-big w-100 m-auto" [hidden]="!partTwoForm">

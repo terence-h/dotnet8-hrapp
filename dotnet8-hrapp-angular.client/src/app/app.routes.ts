@@ -12,6 +12,8 @@ import { authGuard } from './_guards/auth.guard';
 import { adminGuard } from './_guards/admin.guard';
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { RegisterComponent } from './admin/register/register.component';
+import { UserDetailComponent } from './admin/user-detail/user-detail.component';
+import { UserEditComponent } from './admin/user-edit/user-edit.component';
 
 export const routes: Routes = [
     {
@@ -85,12 +87,22 @@ export const routes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'userlist',
+                redirectTo: 'user',
             },
             {
-                path: 'userlist',
+                path: 'user',
                 title: 'Users',
                 component: UserListComponent
+            },
+            {
+                path: 'user/detail/:userId',
+                title: 'View User Detail',
+                component: UserDetailComponent
+            },
+            {
+                path: 'user/edit/:userId',
+                title: 'Edit User Detail',
+                component: UserEditComponent
             },
             {
                 path: 'createuser',

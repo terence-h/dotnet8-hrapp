@@ -3,7 +3,6 @@ using Account.Service.Entities;
 using Account.Service.Interfaces;
 using AutoMapper;
 using Employee.Service.Interfaces;
-using Employee.Service.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +11,10 @@ using Microsoft.EntityFrameworkCore;
 namespace dotnet8_hrapp.server.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class AdminController(ITokenService tokenService, UserManager<User> userManager, IEmployeeService employeeService, IMapper mapper) : ControllerBase
+public class AdminController(ITokenService tokenService, UserManager<User> userManager, RoleManager<Role> roleManager, IEmployeeService employeeService, IMapper mapper) : ControllerBase
 {
     [Authorize(Policy = "RequireAdmin")]
-    [HttpGet("userList")]
+    [HttpGet("user/users")]
     public async Task<ActionResult> GetUsers()
     {
         var users = await userManager.Users
@@ -24,11 +23,30 @@ public class AdminController(ITokenService tokenService, UserManager<User> userM
         {
             u.Id,
             Username = u.UserName,
-            Roles = u.UserRoles.Select(r => r.Role.Name).ToList()
+            Roles = u.UserRoles.Select(r => r.Role.Name).ToList(),
+            u.EmployeeId,
+            u.IsDisabled
         })
         .ToListAsync();
 
         return Ok(users);
+    }
+
+    [Authorize(Policy = "RequireAdmin")]
+    [HttpGet("user/{userId}")] // api/admin/user/{userId}
+    public async Task<ActionResult> GetUser(int userId)
+    {
+        var user = await userManager.Users
+        .Select(u => new
+        {
+            u.Id,
+            Username = u.UserName,
+            Roles = u.UserRoles.Select(r => r.Role.Name).ToList(),
+            u.EmployeeId,
+            u.IsDisabled
+        }).FirstOrDefaultAsync(u => u.Id == userId);
+
+        return Ok(user);
     }
 
     [Authorize(Policy = "RequireAdmin")]
@@ -54,13 +72,41 @@ public class AdminController(ITokenService tokenService, UserManager<User> userM
         return new LoginUserResponse
         {
             Username = user.UserName,
-            Token = await tokenService.CreateToken(user)
+            Token = await tokenService.CreateToken(user),
         };
     }
 
     [Authorize(Policy = "RequireAdmin")]
-    [HttpPost("editRoles")] // api/admin/editRoles
-    public async Task<ActionResult<IList<string>>> EditRoles(UpdateUserRolesRequest request)
+    [HttpPost("user/enableDisableAccount")] // api/admin/enableDisableAccount
+    public async Task<ActionResult> EnableDisableAccount(EnableDisableAccountRequest request)
+    {
+        var user = await userManager.FindByIdAsync(request.UserId.ToString());
+
+        if (user == null)
+            return BadRequest(new { Message = "Username not found" });
+
+        user.IsDisabled = request.IsDisable;
+        await userManager.UpdateAsync(user);
+
+        return Ok(request.UserId);
+    }
+
+    [Authorize(Policy = "RequireAdmin")]
+    [HttpGet("user/roles")]
+    public async Task<ActionResult> GetRoles()
+    {
+        var roles = await roleManager.Roles.Select(r => new
+        {
+            r.Id,
+            r.Name
+        }).ToListAsync();
+
+        return Ok(roles);
+    }
+
+    [Authorize(Policy = "RequireAdmin")]
+    [HttpPut("user/editUser/{id}")] // api/admin/user/editUser
+    public async Task<ActionResult> EditUser(int id, UpdateUserRequest request)
     {
         if (request.Roles.Length == 0)
             return BadRequest(new { Message = "You must select at least one role" });
@@ -69,6 +115,14 @@ public class AdminController(ITokenService tokenService, UserManager<User> userM
 
         if (user == null)
             return BadRequest(new { Message = "Username not found" });
+
+        if (request.CurrentPassword.Length > 0 && request.NewPassword.Length > 0)
+        {
+            if ((await userManager.CheckPasswordAsync(user, request.CurrentPassword)) == false)
+                return BadRequest(new { Message = "Current password does not match"});
+
+            await userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+        }
 
         var currentRoles = await userManager.GetRolesAsync(user);
 
@@ -82,11 +136,11 @@ public class AdminController(ITokenService tokenService, UserManager<User> userM
         if (!result.Succeeded)
             return BadRequest(new { Message = "Failed to remove roles" });
 
-        return Ok(await userManager.GetRolesAsync(user));
+        return Ok(user.Id);
     }
 
     [Authorize(Policy = "RequireAdmin")]
-    [HttpGet("checkUsername")] // api/admin/checkUsername/{userName}
+    [HttpGet("user/checkUsername")] // api/admin/user/checkUsername?userName={userName}
     public async Task<bool> UserExists(string userName)
     {
         return await userManager.Users.AnyAsync(x => x.NormalizedUserName == userName.ToUpper());

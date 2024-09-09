@@ -25,9 +25,10 @@
                     <td>{{user.username}}</td>
                     <td>{{user.roles}}</td>
                     <td>
-                        <a class="btn btn-sm btn-link" [routerLink]="['./detail', user.id]">View</a>
-                        <a class="btn btn-sm btn-link"[routerLink]="['./edit', user.id]">Edit</a>
-                        <!-- <a class="btn btn-sm btn-link" (click)="openModal(user.id, user.username)">Delete</a> -->
+                        <a class="btn btn-sm btn-link" [routerLink]="['../user/detail', user.id]">View</a>
+                        <a class="btn btn-sm btn-link"[routerLink]="['../user/edit', user.id]">Edit</a>
+                        <a class="btn btn-sm btn-link" (click)="openModal($event, user.id, user.username, user.isDisabled)"
+                        (keydown)="openModal($event, user.id, user.username, user.isDisabled)" tabindex="0">{{ user.isDisabled ? 'Enable' : 'Disable' }}</a>
                     </td>
                 </tr>
                 }
@@ -39,9 +40,9 @@
             </tbody>
         </table>
     </div>
-    @if (onDeleted) {
+    @if (onEnableDisable.length > 0) {
     <alert type="success">
-        User information has been deleted successfully.
+        User account has been {{onEnableDisable}}
     </alert>
     }
 </div>
