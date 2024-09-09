@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   router = inject(Router);
   registerForm!: FormGroup<{ username: FormControl<string | null>; password: FormControl<string | null>; employee: FormGroup<{ id: FormControl<number | null>; name: FormControl<string | null>; departmentId: FormControl<string | number | null>; salary: FormControl<string | number | null>; gender: FormControl<string | null>; dateOfBirth: FormControl<string | Date | null>; contactCountryCode: FormControl<string | number | null>; contactNo: FormControl<string | number | null>; empAddress: FormGroup<{ line1: FormControl<string | null>; line2: FormControl<string | null | undefined>; unitNo: FormControl<string | null | undefined>; postalCode: FormControl<string | number | null>; country: FormControl<string | null>; city: FormControl<string | null | undefined>; state: FormControl<string | null | undefined>; }>; }>; }>
   registerErrorMsg = '';
+  userExist = false;
   partTwoForm = false;
   departmentList!: DepartmentList[];
   maxDate = new Date();
@@ -42,7 +43,9 @@ export class RegisterComponent implements OnInit {
   }
 
   isFormPartOneInvalid(): boolean {
-    return this.registerForm.controls.username.hasError('required') || this.registerForm.controls.password.hasError('required');
+    return this.registerForm.controls.username.hasError('required') ||
+    this.registerForm.controls.password.hasError('required') ||
+    this.userExist;
   }
 
   toggleFormPart(): void {
@@ -53,6 +56,13 @@ export class RegisterComponent implements OnInit {
     this.adminService.register(this.registerForm.value).subscribe({
       next: () => { this.router.navigate(['../admin/userlist'])},
       error: error => { this.registerErrorMsg = error?.error?.message }
+    });
+  }
+
+  checkUserExist(): void {
+    this.adminService.checkUserExist(this.registerForm.controls.username.value).subscribe({
+      next: resp => { this.userExist = resp; },
+      error: error => { console.log(error); }
     });
   }
 }

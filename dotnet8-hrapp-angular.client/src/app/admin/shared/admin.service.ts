@@ -17,4 +17,8 @@ export class AdminService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${environment.apiUrl}/admin/userList`);
   }
+
+  checkUserExist(userName: any): Observable<boolean> {
+    return this.http.get<boolean>(`${environment.apiUrl}/admin/checkUsername?userName=${userName}`);
+  }
 }

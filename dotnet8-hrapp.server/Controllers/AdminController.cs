@@ -85,7 +85,9 @@ public class AdminController(ITokenService tokenService, UserManager<User> userM
         return Ok(await userManager.GetRolesAsync(user));
     }
 
-    private async Task<bool> UserExists(string userName)
+    [Authorize(Policy = "RequireAdmin")]
+    [HttpGet("checkUsername")] // api/admin/checkUsername/{userName}
+    public async Task<bool> UserExists(string userName)
     {
         return await userManager.Users.AnyAsync(x => x.NormalizedUserName == userName.ToUpper());
     }
